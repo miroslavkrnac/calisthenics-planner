@@ -77,6 +77,7 @@ module.exports = {
 		'object-curly-newline': 'off',
 		'padded-blocks': 'off',
 		'radix': 'off',
+		'react/prop-types': 'off',
 		
 		'semi': 'off',
 	
