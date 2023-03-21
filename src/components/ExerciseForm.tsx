@@ -10,22 +10,18 @@ export const ExerciseForm: React.FC = () => {
 	const [form, setForm] = useState({ name: '' });
 	const [saving, setSaving] = useState(false);
 
-	const handleChange = (name: string) => (value: NativeSyntheticEvent<TextInputChangeEventData>) => {
+	const handleChange = (name: string) => (value: string) => {
 		setForm({ ...form, [name]: value });
 	};
 
 	const handlePress = async (): Promise<void> => {
 		try {
-			setSaving(true);
-
 			const exercises = await getStorageItem<Exercises>(STORAGE_KEY, []);
 
 			const mergedExercises = [...exercises, form.name];
 
-			const response = storeData(STORAGE_KEY, mergedExercises);
-
-			setSaving(false);
-		} catch (e) {
+			await storeData(STORAGE_KEY, mergedExercises);
+		} finally {
 			setSaving(false);
 		}
 	};
@@ -37,7 +33,7 @@ export const ExerciseForm: React.FC = () => {
 				<TextInput
 					style={styles.input}
 					value={form.name}
-					onChange={handleChange('name')}
+					onChangeText={handleChange('name')}
 					placeholder="Insert exercise name"
 				/>
 			</View>
