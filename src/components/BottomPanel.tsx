@@ -1,18 +1,12 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
-import { Link } from 'react-router-native';
+import { StyleSheet, View } from 'react-native';
+import { NavigationButton } from './NavigationButton';
 
 export const BottomPanel: React.FC = () => (
 	<View style={styles.panel}>
-		<Link to="/">
-			<Text>Home</Text>
-		</Link>
-		<Link to="/exercises">
-			<Text>Exercises</Text>
-		</Link>
-		<Link to="/new-exercise">
-			<Text>New exercise</Text>
-		</Link>
+		<NavigationButton page="home" title="Home" />
+		<NavigationButton page="exercises" title="Exercises" />
+		<NavigationButton page="new-exercise" title="New Exercise" />
 	</View>
 );
 
@@ -23,6 +17,10 @@ const styles = StyleSheet.create({
 		bottom: 0,
 		flexDirection: 'row',
 		justifyContent: 'space-between',
+		alignItems: 'flex-start',
 		width: '100%',
+		borderTopColor: 'black',
+		borderTopWidth: 1,
+		height: 100,
 	},
 });

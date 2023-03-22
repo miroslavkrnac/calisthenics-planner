@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import type { NativeSyntheticEvent, TextInputChangeEventData } from 'react-native';
 import { View, Text, TextInput, StyleSheet, Button } from 'react-native';
 import { getStorageItem, storeData } from '../utils/storage';
 
 type Exercises = string[];
 const STORAGE_KEY = 'exercises';
 
+const DEFAULT_STATE = { name: '' };
+
 export const ExerciseForm: React.FC = () => {
-	const [form, setForm] = useState({ name: '' });
+	const [form, setForm] = useState(DEFAULT_STATE);
 	const [saving, setSaving] = useState(false);
 
 	const handleChange = (name: string) => (value: string) => {
@@ -21,6 +22,8 @@ export const ExerciseForm: React.FC = () => {
 			const mergedExercises = [...exercises, form.name];
 
 			await storeData(STORAGE_KEY, mergedExercises);
+
+			setForm(DEFAULT_STATE);
 		} finally {
 			setSaving(false);
 		}

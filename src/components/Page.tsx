@@ -1,13 +1,7 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { StatusBar } from 'expo-status-bar';
 
-export const Page: FCC = ({ children }) => (
-	<View style={styles.container}>
-		<StatusBar style="auto" />
-		{children}
-	</View>
-);
+export const Page: FCC = ({ children }) => <View style={styles.container}>{children}</View>;
 
 const styles = StyleSheet.create({
 	container: {

@@ -1,23 +1,26 @@
 import React from 'react';
-import { NativeRouter, Route, Routes } from 'react-router-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { StatusBar } from 'expo-status-bar';
 import { ExerciseForm } from './src/components/ExerciseForm';
 import { BottomPanel } from './src/components/BottomPanel';
 import { ExercisesList } from './src/components/ExercisesList';
-import { Page } from './src/components/Page';
 import { Home } from './src/pages/Home';
 
-const Test: React.FC = () => (
-	<NativeRouter>
-		<Page>
-			<Routes>
-				<Route path="/" Component={Home} />
-				<Route path="/exercises" Component={ExercisesList} />
-				<Route path="/new-exercise" Component={ExerciseForm} />
-			</Routes>
+const { Screen, Navigator } = createNativeStackNavigator();
 
-			<BottomPanel />
-		</Page>
-	</NativeRouter>
+const App: React.FC = () => (
+	<NavigationContainer>
+		<StatusBar style="auto" />
+
+		<Navigator>
+			<Screen name="test" options={{ title: 'Home' }} component={Home} />
+			<Screen name="exercises" options={{ title: 'Exercises' }} component={ExercisesList} />
+			<Screen name="new-exercise" options={{ title: 'New exercise' }} component={ExerciseForm} />
+		</Navigator>
+
+		<BottomPanel />
+	</NavigationContainer>
 );
 
-export default Test;
+export default App;
