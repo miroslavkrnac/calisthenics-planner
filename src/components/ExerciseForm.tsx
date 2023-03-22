@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, Button } from 'react-native';
+import { View, TextInput, StyleSheet, Button } from 'react-native';
 import { getStorageItem, storeData } from '../utils/storage';
+import { Page } from './Page';
 
 type Exercises = string[];
 const STORAGE_KEY = 'exercises';
@@ -30,29 +31,21 @@ export const ExerciseForm: React.FC = () => {
 	};
 
 	return (
-		<View style={styles.container}>
-			<Text>New exercise</Text>
-			<View>
-				<TextInput
-					style={styles.input}
-					value={form.name}
-					onChangeText={handleChange('name')}
-					placeholder="Insert exercise name"
-				/>
-			</View>
+		<Page>
+			<TextInput
+				style={styles.input}
+				value={form.name}
+				onChangeText={handleChange('name')}
+				placeholder="Insert exercise name"
+			/>
 			<View style={styles.buttonContainer}>
 				<Button disabled={saving} onPress={handlePress} title="Save" color="#841584" />
 			</View>
-		</View>
+		</Page>
 	);
 };
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		height: '100%',
-		position: 'relative',
-	},
 	input: {
 		height: 40,
 		borderWidth: 1,

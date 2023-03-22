@@ -78,6 +78,7 @@ module.exports = {
 		'padded-blocks': 'off',
 		'radix': 'off',
 		'react/prop-types': 'off',
+		'react/jsx-props-no-spreading': 'off',
 		
 		'semi': 'off',
 	
