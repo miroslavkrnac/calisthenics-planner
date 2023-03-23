@@ -14,6 +14,5 @@ export const NavigationButton: React.FC<NavigationButtonProps> = ({ page, icon }
 		navigation.navigate(page);
 	};
 
-	// @NOTE: needed for proper type checking
 	return <Ionicons name={icon} size={32} color="white" onPress={handlePress} />;
 };

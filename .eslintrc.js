@@ -79,6 +79,7 @@ module.exports = {
 		'radix': 'off',
 		'react/prop-types': 'off',
 		'react/jsx-props-no-spreading': 'off',
+		'react/require-default-props': 'off',
 		
 		'semi': 'off',
 	

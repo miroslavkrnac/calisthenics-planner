@@ -2,21 +2,30 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
-import { ExerciseForm } from './src/components/ExerciseForm';
-import { ExercisesList } from './src/components/ExercisesList';
 import { Home } from './src/pages/Home';
+import { Exercises } from './src/pages/Exercises';
 import { BottomPanel } from './src/components/BottomPanel';
+import { palette } from './src/colors/palette';
+import { NewExercise } from './src/pages/NewExercise';
 
 const { Screen, Navigator } = createNativeStackNavigator();
 
 const App: React.FC = () => (
 	<NavigationContainer>
-		<StatusBar style="auto" />
+		<StatusBar style="light" />
 
-		<Navigator initialRouteName="new-exercise">
+		<Navigator
+			initialRouteName="new-exercise"
+			screenOptions={{
+				headerStyle: { backgroundColor: palette.backgroundSecondary },
+				headerTintColor: palette.textPrimary,
+				headerBackVisible: false,
+				animation: 'none',
+			}}
+		>
 			<Screen name="home" options={{ title: 'Home' }} component={Home} />
-			<Screen name="exercises" options={{ title: 'Exercises' }} component={ExercisesList} />
-			<Screen name="new-exercise" options={{ title: 'New exercise' }} component={ExerciseForm} />
+			<Screen name="exercises" options={{ title: 'Exercises' }} component={Exercises} />
+			<Screen name="new-exercise" options={{ title: 'New exercise' }} component={NewExercise} />
 		</Navigator>
 
 		<BottomPanel />

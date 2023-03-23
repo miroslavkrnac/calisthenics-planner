@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Text } from 'react-native';
 import { Page } from '../components/Page';
+import { Text } from '../components/Text';
 
 export const Home: React.FC = () => (
 	<Page>

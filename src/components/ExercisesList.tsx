@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { SafeAreaView, View, FlatList, Text } from 'react-native';
+import { SafeAreaView, View, FlatList } from 'react-native';
 import { getStorageItem } from '../utils/storage';
+import { Text } from './Text';
 
 const Exercise: React.FC<{ name: string }> = ({ name }) => (
 	<View>

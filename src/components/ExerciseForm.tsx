@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { View, TextInput, StyleSheet, Button } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { getStorageItem, storeData } from '../utils/storage';
-import { Page } from './Page';
+import { TextInput } from './TextInput';
+import { Button } from './Button';
 
 type Exercises = string[];
 const STORAGE_KEY = 'exercises';
@@ -18,6 +19,10 @@ export const ExerciseForm: React.FC = () => {
 
 	const handlePress = async (): Promise<void> => {
 		try {
+			if (!form.name.length) {
+				return;
+			}
+
 			const exercises = await getStorageItem<Exercises>(STORAGE_KEY, []);
 
 			const mergedExercises = [...exercises, form.name];
@@ -31,32 +36,33 @@ export const ExerciseForm: React.FC = () => {
 	};
 
 	return (
-		<Page>
+		<>
 			<TextInput
-				style={styles.input}
+				label="Name"
 				value={form.name}
 				onChangeText={handleChange('name')}
 				placeholder="Insert exercise name"
 			/>
 			<View style={styles.buttonContainer}>
-				<Button disabled={saving} onPress={handlePress} title="Save" color="#841584" />
+				<Button style={styles.saveButton} disabled={saving} onPress={handlePress} title="Save" />
 			</View>
-		</Page>
+		</>
 	);
 };
 
 const styles = StyleSheet.create({
-	input: {
-		height: 40,
-		borderWidth: 1,
-		borderColor: 'lightgray',
-		padding: 10,
-		marginTop: 10,
-	},
 	buttonContainer: {
 		position: 'absolute',
 		bottom: 20,
+		left: 20,
 		width: '100%',
 		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	saveButton: {
+		width: 200,
+		justifyContent: 'center',
+		padding: 12,
+		alignItems: 'center',
 	},
 });
