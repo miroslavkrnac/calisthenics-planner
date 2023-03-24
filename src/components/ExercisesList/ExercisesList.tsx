@@ -22,7 +22,7 @@ export const ExercisesList: React.FC = () => {
 		<SafeAreaView>
 			<FlatList
 				data={exercises}
-				renderItem={({ item: { name } }) => <Exercise name={name} />}
+				renderItem={({ item: { name, id } }) => <Exercise name={name} id={id} />}
 				keyExtractor={({ id }) => id}
 				showsVerticalScrollIndicator={false}
 			/>

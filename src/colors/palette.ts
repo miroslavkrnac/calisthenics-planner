@@ -10,6 +10,6 @@ export const palette = {
 
 	info: '#bc8a5d',
 	warning: '#fdba16',
-	error: 'f45e5e',
+	error: '#f45e5e',
 	success: '#88c177',
 };
