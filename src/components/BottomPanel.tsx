@@ -1,27 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { NavigationButton } from './NavigationButton';
 import { palette } from '../colors/palette';
-import { Text } from './Text';
+import { INITIAL_ROUTE_NAME } from '../consts/navigation';
 
 export const BOTTOM_PANEL_HEIGHT = 100;
 
-export const BottomPanel: React.FC = () => (
-	<View style={styles.panel}>
-		<View style={styles.item}>
-			<NavigationButton page="home" icon="home" />
-			<Text style={styles.text}>Home</Text>
+export const BottomPanel: React.FC = () => {
+	const [activeRoute, setActiveRoute] = useState(INITIAL_ROUTE_NAME);
+
+	const handleNavigation = (page: string): void => {
+		setActiveRoute(page);
+	};
+
+	return (
+		<View style={styles.panel}>
+			<NavigationButton
+				page="home"
+				icon="home"
+				label="Home"
+				activeRoute={activeRoute}
+				onNavigation={handleNavigation}
+			/>
+			<NavigationButton
+				page="exercises"
+				icon="list"
+				label="Exercises"
+				activeRoute={activeRoute}
+				onNavigation={handleNavigation}
+			/>
+			<NavigationButton
+				page="new-exercise"
+				icon="add"
+				label="New exercise"
+				activeRoute={activeRoute}
+				onNavigation={handleNavigation}
+			/>
 		</View>
-		<View style={styles.item}>
-			<NavigationButton page="exercises" icon="list" />
-			<Text style={styles.text}>Exercises</Text>
-		</View>
-		<View style={styles.item}>
-			<NavigationButton page="new-exercise" icon="add" />
-			<Text style={styles.text}>New exercise</Text>
-		</View>
-	</View>
-);
+	);
+};
 
 const styles = StyleSheet.create({
 	panel: {
@@ -36,15 +53,5 @@ const styles = StyleSheet.create({
 		borderTopWidth: 1,
 		height: BOTTOM_PANEL_HEIGHT,
 		backgroundColor: palette.backgroundSecondary,
-	},
-	item: {
-		flex: 1,
-		width: '33.33%',
-		justifyContent: 'center',
-		alignItems: 'center',
-	},
-	text: {
-		marginTop: 3,
-		fontSize: 10,
 	},
 });

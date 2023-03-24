@@ -5,11 +5,9 @@ import { BOTTOM_PANEL_HEIGHT } from './BottomPanel';
 import { palette } from '../colors/palette';
 
 export const Page: FCC = ({ children }) => (
-	<>
-		<DismissKeyboardView>
-			<View style={styles.container}>{children}</View>
-		</DismissKeyboardView>
-	</>
+	<DismissKeyboardView>
+		<View style={styles.container}>{children}</View>
+	</DismissKeyboardView>
 );
 
 const styles = StyleSheet.create({

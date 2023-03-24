@@ -7,6 +7,7 @@ import { Exercises } from './src/pages/Exercises';
 import { BottomPanel } from './src/components/BottomPanel';
 import { palette } from './src/colors/palette';
 import { NewExercise } from './src/pages/NewExercise';
+import { INITIAL_ROUTE_NAME } from './src/consts/navigation';
 
 const { Screen, Navigator } = createNativeStackNavigator();
 
@@ -15,7 +16,7 @@ const App: React.FC = () => (
 		<StatusBar style="light" />
 
 		<Navigator
-			initialRouteName="new-exercise"
+			initialRouteName={INITIAL_ROUTE_NAME}
 			screenOptions={{
 				headerStyle: { backgroundColor: palette.backgroundSecondary },
 				headerTintColor: palette.textPrimary,

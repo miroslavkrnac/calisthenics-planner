@@ -2,6 +2,7 @@
   "name": "calisthenics-planner",
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
+  "private": true,
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -42,6 +43,5 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "prettier": "2.7.1",
     "typescript": "^5.0.2"
-  },
-  "private": true
+  }
 }

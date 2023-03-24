@@ -1,15 +1,15 @@
 export const palette = {
-	backgroundPrimary: '#191a23',
-	backgroundSecondary: '#242633',
+	backgroundPrimary: '#010101',
+	backgroundSecondary: '#1f1f1f',
 
-	primary: '#3c44c0',
-	secondary: '#222439',
+	primary: '#53a4df',
+	secondary: '#fcf4ec',
 
-	textPrimary: '#ffffff',
-	textSecondary: '#64666f',
+	textPrimary: '#fff',
+	textSecondary: '#999999',
 
-	yellow: '#e0b50e',
-	blue: '#007ade',
-	green: '#64a416',
-	purple: '#6939c5',
+	info: '#bc8a5d',
+	warning: '#fdba16',
+	error: 'f45e5e',
+	success: '#88c177',
 };

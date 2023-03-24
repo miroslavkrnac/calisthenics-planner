@@ -14,7 +14,9 @@ export const Button: React.FC<ButtonProps> = ({ type = 'primary', title, style, 
 		{...props}
 		style={[style, styles.button, type === 'primary' ? styles.buttonPrimary : styles.buttonSecondary]}
 	>
-		<Text>{title}</Text>
+		<Text type={type} style={styles.text}>
+			{title}
+		</Text>
 	</TouchableOpacity>
 );
 
@@ -27,5 +29,8 @@ const styles = StyleSheet.create({
 	},
 	button: {
 		borderRadius: 10,
+	},
+	text: {
+		fontWeight: 'bold',
 	},
 });
