@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
+import { Form } from './Form';
+import { randomString } from '../utils/string';
 import { getStorageItem, storeData } from '../utils/storage';
 import { TextInput } from './TextInput';
 import { Button } from './Button';
 
 type Exercises = string[];
-const STORAGE_KEY = 'exercises';
 
+const STORAGE_KEY = 'exercises';
 const DEFAULT_STATE = { name: '' };
 
 export const ExerciseForm: React.FC = () => {
@@ -24,8 +26,7 @@ export const ExerciseForm: React.FC = () => {
 			}
 
 			const exercises = await getStorageItem<Exercises>(STORAGE_KEY, []);
-
-			const mergedExercises = [...exercises, form.name];
+			const mergedExercises = [...exercises, { name: form.name, id: randomString() }];
 
 			await storeData(STORAGE_KEY, mergedExercises);
 
@@ -36,7 +37,7 @@ export const ExerciseForm: React.FC = () => {
 	};
 
 	return (
-		<>
+		<Form>
 			<TextInput
 				label="Name"
 				value={form.name}
@@ -46,7 +47,7 @@ export const ExerciseForm: React.FC = () => {
 			<View style={styles.buttonContainer}>
 				<Button style={styles.saveButton} disabled={saving} onPress={handlePress} title="Save" />
 			</View>
-		</>
+		</Form>
 	);
 };
 

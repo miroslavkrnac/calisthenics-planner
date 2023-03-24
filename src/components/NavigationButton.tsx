@@ -24,7 +24,11 @@ export const NavigationButton: React.FC<NavigationButtonProps> = ({ page, icon, 
 	return (
 		<View style={styles.item}>
 			<TouchableOpacity onPress={handlePress} style={styles.touch}>
-				<Ionicons name={icon} size={32} color={activeRoute === page ? palette.primary : palette.textPrimary} />
+				<Ionicons
+					name={icon}
+					size={32}
+					color={activeRoute === page ? palette.primary : palette.textSecondary}
+				/>
 				<Text style={styles.text}>{label}</Text>
 			</TouchableOpacity>
 		</View>

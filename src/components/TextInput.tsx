@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
 		borderWidth: 1,
 		borderRadius: 7,
 		paddingLeft: 5,
-		backgroundColor: palette.textSecondary,
-		color: palette.textPrimary,
+		backgroundColor: palette.secondary,
+		color: palette.backgroundPrimary,
 	},
 });
