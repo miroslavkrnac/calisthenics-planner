@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text as TextNative, type TextProps as TextPropsNative } from 'react-native';
-import { palette } from '../colors/palette';
+import { palette } from '@colors/palette';
 
 interface TextProps extends TextPropsNative {
 	type?: 'primary' | 'secondary';

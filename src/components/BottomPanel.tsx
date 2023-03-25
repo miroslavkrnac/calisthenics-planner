@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { NavigationButton } from './NavigationButton';
-import { palette } from '../colors/palette';
-import { INITIAL_ROUTE_NAME } from '../consts/navigation';
+import { NavigationButton } from '@components/NavigationButton';
+import { palette } from '@colors/palette';
+import { INITIAL_ROUTE_NAME } from '@consts/navigation';
 
 export const BOTTOM_PANEL_HEIGHT = 100;
 

@@ -1,8 +1,8 @@
 import React from 'react';
 import type { TextInputProps as TextInputNativeProps } from 'react-native';
 import { View, TextInput as TextInputNative, StyleSheet } from 'react-native';
-import { palette } from '../colors/palette';
-import { Text } from './Text';
+import { palette } from '@colors/palette';
+import { Text } from '@components/Text';
 
 interface TextInputProps extends TextInputNativeProps {
 	label?: string;

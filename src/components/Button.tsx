@@ -1,8 +1,8 @@
 import React from 'react';
 import type { TouchableOpacityProps } from 'react-native';
 import { TouchableOpacity, StyleSheet } from 'react-native';
-import { palette } from '../colors/palette';
-import { Text } from './Text';
+import { palette } from '@colors/palette';
+import { Text } from '@components/Text';
 
 interface ButtonProps extends TouchableOpacityProps {
 	type?: 'primary' | 'secondary';

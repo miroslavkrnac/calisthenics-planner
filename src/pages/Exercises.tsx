@@ -1,6 +1,6 @@
 import React from 'react';
-import { Page } from '../components/Page';
-import { ExercisesList } from '../components/ExercisesList';
+import { ExercisesList } from '@components/ExercisesList/ExercisesList';
+import { Page } from '@components/Page';
 
 export const Exercises: React.FC = () => (
 	<Page>

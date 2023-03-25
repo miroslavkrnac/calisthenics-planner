@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Form } from './Form';
-import { randomString } from '../utils/string';
-import { getStorageItem, storeData } from '../utils/storage';
-import { TextInput } from './TextInput';
-import { Button } from './Button';
+import { Button } from '@components/Button';
+import { Form } from '@components/Form';
+import { randomString } from '@utils/string';
+import { getStorageItem, storeData } from '@utils/storage';
+import { TextInput } from '@components/TextInput';
 
 type Exercises = string[];
 

@@ -2,8 +2,8 @@ import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
-import { Text } from './Text';
-import { palette } from '../colors/palette';
+import { palette } from '@colors/palette';
+import { Text } from '@components/Text';
 
 interface NavigationButtonProps {
 	page: RoutesNames;

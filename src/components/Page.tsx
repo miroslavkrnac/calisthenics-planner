@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
+import { palette } from '@colors/palette';
 import { BOTTOM_PANEL_HEIGHT } from './BottomPanel';
-import { palette } from '../colors/palette';
 
 export const Page: FCC = ({ children }) => <View style={styles.container}>{children}</View>;
 
