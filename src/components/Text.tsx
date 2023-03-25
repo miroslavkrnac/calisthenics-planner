@@ -7,7 +7,7 @@ interface TextProps extends TextPropsNative {
 }
 
 export const Text: FCC<TextProps> = ({ type = 'primary', style, children }) => (
-	<TextNative style={[style, type === 'primary' ? styles.textPrimary : styles.textSecondary]}>{children}</TextNative>
+	<TextNative style={[type === 'primary' ? styles.textPrimary : styles.textSecondary, style]}>{children}</TextNative>
 );
 
 const styles = StyleSheet.create({
