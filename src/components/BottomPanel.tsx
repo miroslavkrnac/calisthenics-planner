@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { NavigationButton } from '@components/NavigationButton';
+import { NavigationButton } from '@components/Navigation';
 import { palette } from '@colors/palette';
 import { INITIAL_ROUTE_NAME } from '@consts/navigation';
 

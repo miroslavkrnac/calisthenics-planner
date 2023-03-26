@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useRoute } from '@react-navigation/native';
 import type { RouteProp } from '@navigation/types';
 import { getExercise } from '@components/ExercisesList/ExercisesList.utils';
 import { logError } from '@utils/log';
@@ -8,19 +8,19 @@ import { Text } from '@components/Text';
 import { ExerciseForm } from '@components/ExerciseForm';
 import type { Exercise } from '@components/Exercise/Exercise.types';
 import { randomString } from '@utils';
+import { useSetEntityStateTitle } from '@hooks/useSetEntityStateTitle';
 
 export const ExercisePage: React.FC = () => {
-	const { setOptions } = useNavigation();
 	const { params } = useRoute<RouteProp<'exercise'>>();
-
 	const [loading, setLoading] = useState(true);
 	const [exercise, setExercise] = useState<Exercise>();
 
 	const isNew = params.id === 'new';
 
+	useSetEntityStateTitle();
+
 	useEffect(() => {
 		setLoading(true);
-		setOptions({ title: isNew ? 'New exercise' : 'Edit exercise' });
 
 		const getStorageExercise = async (): Promise<void> => {
 			if (isNew) {

@@ -7,6 +7,7 @@ export type Routes = {
 	exercises: undefined;
 	exercise: { id: string };
 	workouts: undefined;
+	workout: { id: string };
 };
 
 export type RoutesNames = keyof Routes;

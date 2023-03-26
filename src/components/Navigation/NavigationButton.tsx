@@ -4,8 +4,8 @@ import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { palette } from '@colors/palette';
 import { Text } from '@components/Text';
 import type { Routes, RoutesNames } from '@navigation/types';
-import type { IconProps } from './Icon';
-import { Icon } from './Icon';
+import type { IconProps } from '../Icon';
+import { Icon } from '../Icon';
 
 interface NavigationButtonProps<RouteName extends RoutesNames> {
 	page: RouteName;
