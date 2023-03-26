@@ -11,8 +11,8 @@ const menuStyles = {
 	},
 	optionWrapper: {
 		padding: 10,
-		borderTopWidth: 0.3,
-		borderTopColor: palette.textSecondary,
+		borderTopWidth: 1,
+		borderTopColor: palette.borderPrimary,
 	},
 	optionText: {
 		color: palette.backgroundSecondary,

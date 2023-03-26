@@ -1,4 +1,5 @@
 import '@react-navigation/native';
+import type { Routes } from '@navigation/types';
 
 declare global {
 	namespace ReactNavigation {

@@ -1,19 +1,29 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { palette } from '@colors/palette';
 import { Text } from '@components/Text';
+import type { RoutesNames } from '@navigation/types';
+import type { IconProps } from './Icon';
+import { Icon } from './Icon';
 
 interface NavigationButtonProps {
 	page: RoutesNames;
-	icon: keyof typeof Ionicons.glyphMap;
+	icon: IconProps['name'];
+	iconProvider: IconProps['provider'];
 	label: string;
 	activeRoute: string;
 	onNavigation: (page: string) => void;
 }
 
-export const NavigationButton: React.FC<NavigationButtonProps> = ({ page, icon, label, activeRoute, onNavigation }) => {
+export const NavigationButton: React.FC<NavigationButtonProps> = ({
+	page,
+	iconProvider,
+	icon,
+	label,
+	activeRoute,
+	onNavigation,
+}) => {
 	const { navigate } = useNavigation();
 
 	const handlePress = (): void => {
@@ -24,8 +34,9 @@ export const NavigationButton: React.FC<NavigationButtonProps> = ({ page, icon, 
 	return (
 		<View style={styles.item}>
 			<TouchableOpacity onPress={handlePress} style={styles.touch}>
-				<Ionicons
+				<Icon
 					name={icon}
+					provider={iconProvider}
 					size={32}
 					color={activeRoute === page ? palette.primary : palette.textSecondary}
 				/>

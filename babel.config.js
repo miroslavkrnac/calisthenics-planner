@@ -13,6 +13,8 @@ module.exports = function (api) {
 						'@pages': './src/pages',
 						'@colors': './src/colors',
 						'@consts': './src/consts',
+						'@navigation': './src/navigation',
+						'@hooks': './src/hooks',
 					},
 				},
 			],

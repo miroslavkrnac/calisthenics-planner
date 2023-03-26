@@ -9,7 +9,7 @@ import {
 	ContextMenuOption,
 	ContextMenuHeader,
 } from '@components/ContextMenu';
-import type { Exercise as ExerciseProps } from './Exercise.types';
+import type { ExerciseProps } from './Exercise.types';
 
 export const Exercise: React.FC<ExerciseProps> = ({ name, isFirst, isLast, onDelete, onEdit }) => (
 	<ContextMenu>
@@ -33,8 +33,8 @@ const styles = StyleSheet.create({
 		width: '100%',
 		backgroundColor: palette.backgroundSecondary,
 		padding: 20,
-		borderBottomWidth: 0.3,
-		borderBottomColor: palette.textSecondary,
+		borderBottomWidth: 1,
+		borderBottomColor: palette.borderSecondary,
 	},
 	first: {
 		borderTopLeftRadius: 10,

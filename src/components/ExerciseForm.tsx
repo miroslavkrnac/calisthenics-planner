@@ -2,18 +2,23 @@ import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Button } from '@components/Button';
 import { Form } from '@components/Form';
-import { randomString } from '@utils/string';
 import { getStorageItem, storeData } from '@utils/storage';
 import { TextInput } from '@components/TextInput';
+import { logError } from '@utils/log';
+import { useNavigation } from '@react-navigation/native';
+import type { Exercise } from './ExercisesList/Exercise.types';
 
-type Exercises = string[];
+interface ExerciseFormProps {
+	initialValues: Exercise;
+	isNew: boolean;
+}
 
 const STORAGE_KEY = 'exercises';
-const DEFAULT_STATE = { name: '' };
 
-export const ExerciseForm: React.FC = () => {
-	const [form, setForm] = useState(DEFAULT_STATE);
+export const ExerciseForm: React.FC<ExerciseFormProps> = ({ initialValues, isNew }) => {
+	const [form, setForm] = useState(initialValues);
 	const [saving, setSaving] = useState(false);
+	const { navigate } = useNavigation();
 
 	const handleChange = (name: string) => (value: string) => {
 		setForm({ ...form, [name]: value });
@@ -25,12 +30,16 @@ export const ExerciseForm: React.FC = () => {
 				return;
 			}
 
-			const exercises = await getStorageItem<Exercises>(STORAGE_KEY, []);
-			const mergedExercises = [...exercises, { name: form.name, id: randomString() }];
+			const exercises = await getStorageItem<Exercise[]>(STORAGE_KEY, []);
+			const filteredExercises = exercises.filter((exercise) => exercise.id !== form.id);
+
+			const mergedExercises = [...filteredExercises, form];
 
 			await storeData(STORAGE_KEY, mergedExercises);
 
-			setForm(DEFAULT_STATE);
+			isNew ? setForm(initialValues) : navigate('exercises');
+		} catch (e) {
+			logError(e as Error);
 		} finally {
 			setSaving(false);
 		}
@@ -45,7 +54,12 @@ export const ExerciseForm: React.FC = () => {
 				placeholder="Insert exercise name"
 			/>
 			<View style={styles.buttonContainer}>
-				<Button style={styles.saveButton} disabled={saving} onPress={handlePress} title="Save" />
+				<Button
+					style={styles.saveButton}
+					disabled={saving}
+					onPress={handlePress}
+					title={isNew ? 'Create' : 'Save'}
+				/>
 			</View>
 		</Form>
 	);

@@ -1,16 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { FlatList, SafeAreaView, Alert } from 'react-native';
+import React, { useState } from 'react';
+import { FlatList, SafeAreaView } from 'react-native';
 import { storeData } from '@utils/storage';
 import { confirm } from '@utils/alert';
 import { logError } from '@utils/log';
+import { useNavigation } from '@react-navigation/native';
+import { usePageFocus } from '@hooks/usePageFocus';
 import { Exercise } from './Exercise';
 import { getExercises } from './ExerciseList.utils';
 import type { Exercise as ExerciseType } from './Exercise.types';
 
 export const ExercisesList: React.FC = () => {
 	const [exercises, setExercises] = useState<ExerciseType[]>([]);
+	const { navigate } = useNavigation();
 
-	useEffect(() => {
+	usePageFocus(() => {
 		const fn = async (): Promise<void> => {
 			const result = await getExercises();
 
@@ -21,7 +24,7 @@ export const ExercisesList: React.FC = () => {
 	}, []);
 
 	const handleEdit = (id: string): void => {
-		console.log('Edit', id);
+		navigate('exercise', { id });
 	};
 
 	const deleteExercise = async (id: string): Promise<void> => {
@@ -44,9 +47,10 @@ export const ExercisesList: React.FC = () => {
 	};
 
 	return (
-		<SafeAreaView>
+		<SafeAreaView style={{ flex: 1 }}>
 			<FlatList
 				data={exercises}
+				style={{ flex: 1 }}
 				renderItem={({ item: { name, id }, index }) => (
 					<Exercise
 						name={name}

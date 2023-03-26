@@ -17,22 +17,25 @@ export const BottomPanel: React.FC = () => {
 		<View style={styles.panel}>
 			<NavigationButton
 				page="home"
+				iconProvider="ionicons"
 				icon="home"
 				label="Home"
 				activeRoute={activeRoute}
 				onNavigation={handleNavigation}
 			/>
 			<NavigationButton
-				page="exercises"
-				icon="list"
-				label="Exercises"
+				page="workouts"
+				icon="dumbbell"
+				iconProvider="materialCommunityIcons"
+				label="Workouts"
 				activeRoute={activeRoute}
 				onNavigation={handleNavigation}
 			/>
 			<NavigationButton
-				page="new-exercise"
-				icon="add"
-				label="New exercise"
+				page="exercises"
+				iconProvider="ionicons"
+				icon="list"
+				label="Exercises"
 				activeRoute={activeRoute}
 				onNavigation={handleNavigation}
 			/>

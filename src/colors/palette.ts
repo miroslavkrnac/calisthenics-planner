@@ -2,6 +2,9 @@ export const palette = {
 	backgroundPrimary: '#010101',
 	backgroundSecondary: '#1f1f1f',
 
+	borderSecondary: '#333333',
+	borderPrimary: '#E3D7CA',
+
 	primary: '#53a4df',
 	secondary: '#fcf4ec',
 
