@@ -8,6 +8,8 @@ import { BottomPanel } from '@components/BottomPanel';
 import { palette } from '@colors/palette';
 import { INITIAL_ROUTE_NAME } from '@consts/navigation';
 
+import { ExercisesPageHeaderRight } from '@pages/ExercisesPage/ExercisesPageHeaderRight';
+
 const { Screen, Navigator } = createNativeStackNavigator();
 
 const App: React.FC = () => (
@@ -25,7 +27,14 @@ const App: React.FC = () => (
 				}}
 			>
 				<Screen name="home" options={{ title: 'Home' }} component={HomePage} />
-				<Screen name="exercises" options={{ title: 'Exercises' }} component={ExercisesPage} />
+				<Screen
+					name="exercises"
+					options={{
+						title: 'Exercises',
+						headerRight: ExercisesPageHeaderRight,
+					}}
+					component={ExercisesPage}
+				/>
 				<Screen name="exercise" component={ExercisePage} />
 			</Navigator>
 

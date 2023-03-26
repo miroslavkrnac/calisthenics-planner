@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import type { RouteProp } from '@navigation/types';
-import { getExercise } from '@components/ExercisesList/ExerciseList.utils';
+import { getExercise } from '@components/ExercisesList/ExercisesList.utils';
 import { logError } from '@utils/log';
 import { Page } from '@components/Page';
 import { Text } from '@components/Text';
 import { ExerciseForm } from '@components/ExerciseForm';
-import type { Exercise } from '@components/ExercisesList/Exercise.types';
+import type { Exercise } from '@components/Exercise/Exercise.types';
 import { randomString } from '@utils';
 
 export const ExercisePage: React.FC = () => {
@@ -16,7 +16,7 @@ export const ExercisePage: React.FC = () => {
 	const [loading, setLoading] = useState(true);
 	const [exercise, setExercise] = useState<Exercise>();
 
-	const isNew = !params?.id;
+	const isNew = params.id === 'new';
 
 	useEffect(() => {
 		setLoading(true);

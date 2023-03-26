@@ -6,7 +6,7 @@ import { getStorageItem, storeData } from '@utils/storage';
 import { TextInput } from '@components/TextInput';
 import { logError } from '@utils/log';
 import { useNavigation } from '@react-navigation/native';
-import type { Exercise } from './ExercisesList/Exercise.types';
+import type { Exercise } from './Exercise/Exercise.types';
 
 interface ExerciseFormProps {
 	initialValues: Exercise;
@@ -37,7 +37,7 @@ export const ExerciseForm: React.FC<ExerciseFormProps> = ({ initialValues, isNew
 
 			await storeData(STORAGE_KEY, mergedExercises);
 
-			isNew ? setForm(initialValues) : navigate('exercises');
+			navigate('exercises');
 		} catch (e) {
 			logError(e as Error);
 		} finally {

@@ -5,9 +5,9 @@ import { confirm } from '@utils/alert';
 import { logError } from '@utils/log';
 import { useNavigation } from '@react-navigation/native';
 import { usePageFocus } from '@hooks/usePageFocus';
-import { Exercise } from './Exercise';
-import { getExercises } from './ExerciseList.utils';
-import type { Exercise as ExerciseType } from './Exercise.types';
+import { Exercise } from '../Exercise/Exercise';
+import { getExercises } from './ExercisesList.utils';
+import type { Exercise as ExerciseType } from '../Exercise/Exercise.types';
 
 export const ExercisesList: React.FC = () => {
 	const [exercises, setExercises] = useState<ExerciseType[]>([]);

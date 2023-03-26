@@ -5,7 +5,7 @@ export type EntityRouteTypes = 'new' | 'edit';
 export type Routes = {
 	home: undefined;
 	exercises: undefined;
-	exercise: { id: string } | undefined;
+	exercise: { id: string };
 	workouts: undefined;
 };
 

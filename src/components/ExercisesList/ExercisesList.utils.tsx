@@ -1,6 +1,6 @@
 import { getStorageItem } from '@utils/storage';
 import { logError } from '@utils';
-import type { Exercise } from './Exercise.types';
+import type { Exercise } from '../Exercise/Exercise.types';
 
 export const getExercises = (): Promise<Exercise[]> => getStorageItem<Exercise[]>('exercises', []);
 
