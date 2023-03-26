@@ -6,13 +6,23 @@ import { StyleSheet } from 'react-native';
 export const ExercisesPageHeaderRight: React.FC = () => {
 	const { navigate } = useNavigation();
 
-	return <Button title="Add" style={styles.newExerciseButton} onPress={() => navigate('exercise', { id: 'new' })} />;
+	return (
+		<Button
+			title="Add"
+			style={styles.button}
+			textStyle={styles.text}
+			onPress={() => navigate('exercise', { id: 'new' })}
+		/>
+	);
 };
 
 const styles = StyleSheet.create({
-	newExerciseButton: {
+	button: {
 		width: 50,
 		padding: 8,
 		fontSize: 6,
+	},
+	text: {
+		textAlign: 'center',
 	},
 });
