@@ -1,7 +1,8 @@
 import React from 'react';
-import { Ionicons, MaterialCommunityIcons, Entypo, AntDesign } from '@expo/vector-icons';
+import { Ionicons, MaterialCommunityIcons, Entypo, AntDesign, FontAwesome5 } from '@expo/vector-icons';
+import type { TextProps } from 'react-native';
 
-type IconProvider = 'ionicons' | 'materialCommunityIcons' | 'entypo' | 'antDesign';
+type IconProvider = keyof typeof IconsMap;
 
 type IoniconsNames = keyof typeof Ionicons.glyphMap;
 type MaterialCommunityIconsNames = keyof typeof MaterialCommunityIcons.glyphMap;
@@ -10,7 +11,7 @@ type AntDesignNames = keyof typeof AntDesign.glyphMap;
 
 type IconNames = IoniconsNames | MaterialCommunityIconsNames | EntypoNames | AntDesignNames;
 
-export interface IconProps {
+export interface IconProps extends TextProps {
 	provider: IconProvider;
 	name: IconNames;
 	size?: number;
@@ -22,10 +23,12 @@ const IconsMap = {
 	materialCommunityIcons: MaterialCommunityIcons,
 	entypo: Entypo,
 	antDesign: AntDesign,
+	fontAwesome5: FontAwesome5,
 } as const;
 
 export const Icon: React.FC<IconProps> = ({ provider, name, ...props }) => {
 	const Component = IconsMap[provider];
 
+	// any is intentional
 	return <Component name={name as any} {...props} />;
 };
