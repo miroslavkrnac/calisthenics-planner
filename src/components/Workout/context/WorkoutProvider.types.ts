@@ -7,3 +7,7 @@ export interface WorkoutState {
 	removeExerciseRep: (exerciseId: string, repId: string) => void;
 	addExercise: (exerciseId: string, name: string) => void;
 }
+
+export interface WorkoutProviderProps {
+	workout: WorkoutType;
+}

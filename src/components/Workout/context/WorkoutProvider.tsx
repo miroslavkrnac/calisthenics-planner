@@ -1,15 +1,12 @@
 import { randomString } from '@utils';
 import React, { useState } from 'react';
-import type { WorkoutState } from './WorkoutProvider.types';
+import type { WorkoutProviderProps, WorkoutState } from './WorkoutProvider.types';
 import type { WorkoutType } from '../Workout.types';
 
 export const WorkoutContext = React.createContext<WorkoutState | undefined>(undefined);
 
-export const WorkoutProvider: FCC = ({ children }) => {
-	const [workout, setWorkout] = useState<WorkoutType>({
-		id: randomString(),
-		exercises: [],
-	});
+export const WorkoutProvider: FCC<WorkoutProviderProps> = ({ children, workout: workoutDefaultValue }) => {
+	const [workout, setWorkout] = useState<WorkoutType>(workoutDefaultValue);
 
 	const addExercise = (id: string, name: string): void => {
 		if (workout.exercises.find((exercise) => exercise.id === id)) {
