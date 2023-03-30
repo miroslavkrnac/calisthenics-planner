@@ -12,6 +12,10 @@ export const WorkoutProvider: FCC = ({ children }) => {
 	});
 
 	const addExercise = (id: string, name: string): void => {
+		if (workout.exercises.find((exercise) => exercise.id === id)) {
+			return;
+		}
+
 		setWorkout((w) => ({
 			...w,
 			exercises: [...w.exercises, { id, name, reps: [] }],
