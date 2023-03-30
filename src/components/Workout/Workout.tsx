@@ -6,6 +6,8 @@ import { View, StyleSheet, FlatList } from 'react-native';
 import { getExercises } from '@components/ExercisesList';
 import { mapExerciseToOption } from '@components/Exercise';
 import { palette } from '@colors/palette';
+import { Text } from '@components/Text';
+import { getFullDate } from '@utils';
 import { WorkoutExercise } from './WorkoutExercise';
 import { useWorkout } from './context/useWorkout';
 
@@ -22,12 +24,13 @@ const getOptions = async (): Promise<OptionType[]> => {
 export const Workout: React.FC = () => {
 	const {
 		addExercise,
-		workout: { exercises },
+		workout: { exercises, startDate },
 	} = useWorkout();
 
 	return (
 		<>
-			<View>
+			<View style={styles.titleContainer}>
+				<Text style={styles.titleText}>{getFullDate(new Date(startDate))}</Text>
 				<SelectList
 					title="Select exercise"
 					trigger={ModalTrigger}
@@ -51,5 +54,15 @@ export const Workout: React.FC = () => {
 const styles = StyleSheet.create({
 	addExercise: {
 		color: palette.textPrimary,
+	},
+	titleContainer: {
+		flexDirection: 'row',
+		justifyContent: 'space-around',
+		alignItems: 'center',
+		marginTop: 15,
+		marginBottom: 15,
+	},
+	titleText: {
+		fontSize: 20,
 	},
 });
