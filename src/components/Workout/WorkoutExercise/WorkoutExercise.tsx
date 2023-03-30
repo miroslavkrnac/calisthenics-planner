@@ -4,12 +4,13 @@ import { View } from 'react-native';
 import { Text } from '@components/Text';
 import type { WorkoutExerciseProps } from './WorkoutExercise.types';
 import { useWorkout } from '../context/useWorkout';
+import { WorkoutRep } from '../WorkoutRep/WorkoutRep';
 
 export const WorkoutExercise: React.FC<WorkoutExerciseProps> = ({ id, name, reps }) => {
-	const { addRep, removeExercise, removeExerciseRep } = useWorkout();
+	const { addRep, removeExercise } = useWorkout();
 
 	return (
-		<View key={id}>
+		<View>
 			<View
 				style={{
 					flexDirection: 'row',
@@ -40,17 +41,7 @@ export const WorkoutExercise: React.FC<WorkoutExerciseProps> = ({ id, name, reps
 			</View>
 			<View>
 				{reps.map(({ count, weight, id: repId }) => (
-					<View key={repId} style={{ flexDirection: 'row' }}>
-						<Text style={{ fontSize: 25 }}>{weight} kg</Text>
-						<Text style={{ fontSize: 25 }}>{count} reps</Text>
-						<Icon
-							provider="antDesign"
-							name="delete"
-							size={30}
-							onPress={() => removeExerciseRep(id, repId)}
-							style={{ color: 'white', marginLeft: 10 }}
-						/>
-					</View>
+					<WorkoutRep key={repId} weight={weight} count={count} exerciseId={id} id={repId} />
 				))}
 			</View>
 		</View>
