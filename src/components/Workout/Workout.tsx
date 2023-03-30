@@ -2,7 +2,7 @@ import React from 'react';
 import { Icon } from '@components/Icon';
 import type { OptionType } from '@components/SelectList';
 import { SelectList } from '@components/SelectList';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, FlatList } from 'react-native';
 import { getExercises } from '@components/ExercisesList';
 import { mapExerciseToOption } from '@components/Exercise';
 import { palette } from '@colors/palette';
@@ -36,11 +36,14 @@ export const Workout: React.FC = () => {
 				/>
 			</View>
 
-			<View>
-				{exercises.map(({ id, name, reps }) => (
+			<FlatList
+				data={exercises}
+				renderItem={({ item: { name, id, reps } }) => (
 					<WorkoutExercise key={id} id={id} name={name} reps={reps} />
-				))}
-			</View>
+				)}
+				keyExtractor={({ id }) => id}
+				showsVerticalScrollIndicator={false}
+			/>
 		</>
 	);
 };

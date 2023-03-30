@@ -1,16 +1,22 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { SafeAreaView, StyleSheet, View } from 'react-native';
 import { palette } from '@colors/palette';
-import { BOTTOM_PANEL_HEIGHT } from './BottomPanel';
 
-export const Page: FCC = ({ children }) => <View style={styles.container}>{children}</View>;
+export const Page: FCC = ({ children }) => (
+	<SafeAreaView style={styles.container}>
+		<View style={styles.view}>{children}</View>
+	</SafeAreaView>
+);
 
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: palette.backgroundPrimary,
-		marginBottom: BOTTOM_PANEL_HEIGHT,
 		position: 'relative',
+	},
+	view: {
+		flex: 1,
 		padding: 20,
+		marginBottom: 65,
 	},
 });

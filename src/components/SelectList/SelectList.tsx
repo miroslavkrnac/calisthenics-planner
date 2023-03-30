@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Modal, SafeAreaView, View, StyleSheet, FlatList } from 'react-native';
+import { Modal, View, StyleSheet, FlatList } from 'react-native';
 import { Text } from '@components/Text';
 import { palette } from '@colors/palette';
 import { Button } from '@components/Button';
@@ -47,7 +47,7 @@ export const SelectList: React.FC<SelectListProps> = ({ trigger: TriggerCom, tit
 			<TriggerCom onPress={() => setModalVisible(true)} />
 
 			<Modal animationType="slide" transparent visible={modalVisible} onRequestClose={closeModal}>
-				<SafeAreaView style={styles.container}>
+				<View style={styles.container}>
 					<View>
 						<Button style={styles.closeButton} title="Close" onPress={closeModal} />
 						<Text style={styles.title} type="secondary">
@@ -69,7 +69,7 @@ export const SelectList: React.FC<SelectListProps> = ({ trigger: TriggerCom, tit
 						keyExtractor={({ value }) => value}
 						showsVerticalScrollIndicator={false}
 					/>
-				</SafeAreaView>
+				</View>
 			</Modal>
 		</>
 	);

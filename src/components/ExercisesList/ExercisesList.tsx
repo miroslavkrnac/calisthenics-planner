@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FlatList, SafeAreaView } from 'react-native';
+import { FlatList } from 'react-native';
 import { storeData } from '@utils/storage';
 import { confirm } from '@utils/alert';
 import { logError } from '@utils/log';
@@ -47,23 +47,21 @@ export const ExercisesList: React.FC = () => {
 	};
 
 	return (
-		<SafeAreaView style={{ flex: 1 }}>
-			<FlatList
-				data={exercises}
-				style={{ flex: 1 }}
-				renderItem={({ item: { name, id }, index }) => (
-					<Exercise
-						name={name}
-						id={id}
-						isFirst={index === 0}
-						isLast={index === exercises.length - 1}
-						onDelete={() => handleDelete(id)}
-						onEdit={() => handleEdit(id)}
-					/>
-				)}
-				keyExtractor={({ id }) => id}
-				showsVerticalScrollIndicator={false}
-			/>
-		</SafeAreaView>
+		<FlatList
+			data={exercises}
+			style={{ flex: 1 }}
+			renderItem={({ item: { name, id }, index }) => (
+				<Exercise
+					name={name}
+					id={id}
+					isFirst={index === 0}
+					isLast={index === exercises.length - 1}
+					onDelete={() => handleDelete(id)}
+					onEdit={() => handleEdit(id)}
+				/>
+			)}
+			keyExtractor={({ id }) => id}
+			showsVerticalScrollIndicator={false}
+		/>
 	);
 };
