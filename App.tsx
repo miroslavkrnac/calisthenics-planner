@@ -10,6 +10,8 @@ import { INITIAL_ROUTE_NAME } from '@consts/navigation';
 import { WorkoutsPage } from '@pages/WorkoutsPage';
 import { WorkoutPage } from '@pages/WorkoutPage';
 import { PageHeaderNewEntityButton } from '@components/Navigation/PageHeaderNewEntityButton';
+import { Text } from '@components/Text';
+import { View, StyleSheet } from 'react-native';
 
 const { Screen, Navigator } = createNativeStackNavigator();
 
@@ -21,10 +23,13 @@ const App: React.FC = () => (
 			<Navigator
 				initialRouteName={INITIAL_ROUTE_NAME}
 				screenOptions={{
-					headerStyle: { backgroundColor: palette.backgroundSecondary },
-					headerTintColor: palette.textPrimary,
-					headerBackVisible: false,
 					animation: 'none',
+					header: ({ options: { title, headerRight } }) => (
+						<View style={styles.header}>
+							<Text style={styles.headerTitle}>{title}</Text>
+							<View>{headerRight && headerRight({ canGoBack: true })}</View>
+						</View>
+					),
 				}}
 			>
 				<Screen name="home" options={{ title: 'Home' }} component={HomePage} />
@@ -56,5 +61,20 @@ const App: React.FC = () => (
 		</NavigationContainer>
 	</MenuProvider>
 );
+
+const styles = StyleSheet.create({
+	header: {
+		height: 110,
+		paddingHorizontal: 20,
+		paddingTop: 60,
+		backgroundColor: palette.backgroundSecondary,
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		alignItems: 'center',
+	},
+	headerTitle: {
+		fontSize: 30,
+	},
+});
 
 export default App;
