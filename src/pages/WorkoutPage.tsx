@@ -5,7 +5,7 @@ import { Workout } from '@components/Workout';
 import { useSetEntityStateTitle } from '@hooks/useSetEntityStateTitle';
 import { WorkoutProvider } from '@components/Workout/context/WorkoutProvider';
 import type { WorkoutType } from '@components/Workout/Workout.types';
-import { getDefaultWorkout } from '@components/Workout/Workout.utils';
+import { createDefaultWorkout } from '@components/Workout/Workout.utils';
 import { Text } from '@components/Text';
 
 export const WorkoutPage: React.FC = () => {
@@ -16,7 +16,7 @@ export const WorkoutPage: React.FC = () => {
 
 	useEffect(() => {
 		setLoading(true);
-		setWorkout(getDefaultWorkout());
+		setWorkout(createDefaultWorkout());
 		setLoading(false);
 	}, []);
 

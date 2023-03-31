@@ -1,7 +1,7 @@
-import { randomString } from '@utils';
 import React, { useState } from 'react';
 import type { UpdateRepPayload, WorkoutProviderProps, WorkoutState } from './WorkoutProvider.types';
 import type { WorkoutType } from '../Workout.types';
+import { createDefaultRep } from '../Workout.utils';
 
 export const WorkoutContext = React.createContext<WorkoutState | undefined>(undefined);
 
@@ -15,7 +15,7 @@ export const WorkoutProvider: FCC<WorkoutProviderProps> = ({ children, workout: 
 
 		setWorkout((w) => ({
 			...w,
-			exercises: [...w.exercises, { id, name, reps: [] }],
+			exercises: [...w.exercises, { id, name, reps: [createDefaultRep()] }],
 		}));
 	};
 
@@ -26,7 +26,7 @@ export const WorkoutProvider: FCC<WorkoutProviderProps> = ({ children, workout: 
 				if (exercise.id === exerciseId) {
 					return {
 						...exercise,
-						reps: [...exercise.reps, { weight: 0, count: 0, id: randomString() }],
+						reps: [...exercise.reps, createDefaultRep()],
 					};
 				}
 
