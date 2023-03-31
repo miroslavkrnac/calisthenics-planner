@@ -25,11 +25,15 @@ export const Workout: React.FC = () => {
 
 	const navigation = useNavigation();
 
+	const handleSave = (): void => {
+		console.log(JSON.stringify(workout, null, 4));
+	};
+
 	useEffect(() => {
 		navigation.setOptions({
-			headerRight: () => <PageHeaderRightButton title="Save" onPress={() => console.log('save')} />,
+			headerRight: () => <PageHeaderRightButton title="Save" onPress={handleSave} />,
 		});
-	}, [navigation]);
+	}, [navigation, workout]);
 
 	useEffect(() => {
 		fetchExercises().catch(logError);
@@ -69,11 +73,11 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		marginTop: 15,
 		marginBottom: 15,
-		paddingBottom: 15,
+		paddingBottom: 10,
 		borderBottomColor: palette.borderSecondary,
 		borderBottomWidth: 1,
 	},
 	titleText: {
-		fontSize: 20,
+		fontSize: 15,
 	},
 });

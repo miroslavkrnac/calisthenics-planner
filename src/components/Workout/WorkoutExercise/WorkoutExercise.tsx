@@ -54,21 +54,21 @@ const styles = StyleSheet.create({
 		color: palette.textPrimary,
 	},
 	container: {
-		marginBottom: 20,
+		marginBottom: 10,
 	},
 	header: {
-		fontSize: 30,
+		fontSize: 25,
 		fontWeight: '500',
 	},
 	repsContainer: {
 		borderBottomColor: palette.borderSecondary,
 		borderBottomWidth: 1,
-		paddingBottom: 15,
+		paddingBottom: 10,
 		paddingLeft: 12,
 	},
 	headerContainer: {
 		flexDirection: 'row',
 		alignItems: 'center',
-		marginTop: 15,
+		marginTop: 10,
 	},
 });
