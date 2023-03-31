@@ -8,6 +8,8 @@ import { Text } from '@components/Text';
 import { getFullDate, logError } from '@utils';
 import { useExercisesStore } from '@stores/exercises/store';
 import type { SelectListProps } from '@components/SelectList/SelectList.types';
+import { useNavigation } from '@react-navigation/native';
+import { PageHeaderRightButton } from '@components/Navigation';
 import { WorkoutExercise } from './WorkoutExercise';
 import { useWorkout } from './context/useWorkout';
 
@@ -16,12 +18,18 @@ const ModalTrigger: SelectListProps['trigger'] = ({ onPress }) => (
 );
 
 export const Workout: React.FC = () => {
-	const {
-		addExercise,
-		workout: { exercises, startDate },
-	} = useWorkout();
-
 	const { fetchExercises, exercises: allExercises } = useExercisesStore();
+
+	const { addExercise, workout } = useWorkout();
+	const { exercises, startDate } = workout;
+
+	const navigation = useNavigation();
+
+	useEffect(() => {
+		navigation.setOptions({
+			headerRight: () => <PageHeaderRightButton title="Save" onPress={() => console.log('save')} />,
+		});
+	}, [navigation]);
 
 	useEffect(() => {
 		fetchExercises().catch(logError);

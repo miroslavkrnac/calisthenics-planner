@@ -1,25 +1,15 @@
 import { Button } from '@components/Button';
-import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { StyleSheet } from 'react-native';
 
 interface PageHeaderRightButtonProps {
 	title: string;
-	page: 'exercise' | 'workout';
+	onPress: () => void;
 }
 
-export const PageHeaderRightButton: React.FC<PageHeaderRightButtonProps> = ({ title, page }) => {
-	const { navigate } = useNavigation();
-
-	return (
-		<Button
-			title={title}
-			style={styles.button}
-			textStyle={styles.text}
-			onPress={() => navigate(page, { id: 'new' })}
-		/>
-	);
-};
+export const PageHeaderRightButton: React.FC<PageHeaderRightButtonProps> = ({ title, onPress }) => (
+	<Button title={title} style={styles.button} textStyle={styles.text} onPress={onPress} />
+);
 
 const styles = StyleSheet.create({
 	button: {

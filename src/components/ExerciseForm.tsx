@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Button } from '@components/Button';
+import React, { useEffect, useState } from 'react';
 import { Form } from '@components/Form';
 import { TextInput } from '@components/TextInput';
 import { logError } from '@utils/log';
 import { useNavigation } from '@react-navigation/native';
 import { useExercisesStore } from '@stores/exercises/store';
 import type { Exercise } from '@stores/exercises/store.types';
+import { PageHeaderRightButton } from './Navigation';
 
 interface ExerciseFormProps {
 	initialValues: Exercise;
@@ -14,10 +13,15 @@ interface ExerciseFormProps {
 }
 
 export const ExerciseForm: React.FC<ExerciseFormProps> = ({ initialValues, isNew }) => {
-	const [form, setForm] = useState(initialValues);
-	const [saving, setSaving] = useState(false);
-	const { navigate } = useNavigation();
 	const { editExercise, addExercise } = useExercisesStore();
+	const [form, setForm] = useState(initialValues);
+	const navigation = useNavigation();
+
+	useEffect(() => {
+		navigation.setOptions({
+			headerRight: () => <PageHeaderRightButton title={isNew ? 'Create' : 'Save'} onPress={handlePress} />,
+		});
+	}, [navigation, form]);
 
 	const handleChange = (name: string) => (value: string) => {
 		setForm({ ...form, [name]: value });
@@ -31,11 +35,9 @@ export const ExerciseForm: React.FC<ExerciseFormProps> = ({ initialValues, isNew
 
 			isNew ? await addExercise(form) : await editExercise(form);
 
-			navigate('exercises');
+			navigation.navigate('exercises');
 		} catch (e) {
 			logError(e as Error);
-		} finally {
-			setSaving(false);
 		}
 	};
 
@@ -47,31 +49,6 @@ export const ExerciseForm: React.FC<ExerciseFormProps> = ({ initialValues, isNew
 				onChangeText={handleChange('name')}
 				placeholder="Insert exercise name"
 			/>
-			<View style={styles.buttonContainer}>
-				<Button
-					style={styles.saveButton}
-					disabled={saving}
-					onPress={handlePress}
-					title={isNew ? 'Create' : 'Save'}
-				/>
-			</View>
 		</Form>
 	);
 };
-
-const styles = StyleSheet.create({
-	buttonContainer: {
-		position: 'absolute',
-		bottom: 20,
-		left: 20,
-		width: '100%',
-		justifyContent: 'center',
-		alignItems: 'center',
-	},
-	saveButton: {
-		width: 200,
-		justifyContent: 'center',
-		padding: 12,
-		alignItems: 'center',
-	},
-});

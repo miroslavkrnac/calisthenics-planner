@@ -8,8 +8,8 @@ import { BottomPanel } from '@components/BottomPanel';
 import { palette } from '@colors/palette';
 import { INITIAL_ROUTE_NAME } from '@consts/navigation';
 import { WorkoutsPage } from '@pages/WorkoutsPage';
-import { PageHeaderRightButton } from '@components/Navigation';
 import { WorkoutPage } from '@pages/WorkoutPage';
+import { PageHeaderNewEntityButton } from '@components/Navigation/PageHeaderNewEntityButton';
 
 const { Screen, Navigator } = createNativeStackNavigator();
 
@@ -34,7 +34,7 @@ const App: React.FC = () => (
 					name="workouts"
 					options={{
 						title: 'Workouts',
-						headerRight: () => <PageHeaderRightButton title="Add new" page="workout" />,
+						headerRight: () => <PageHeaderNewEntityButton title="Add new" page="workout" />,
 					}}
 					component={WorkoutsPage}
 				/>
@@ -45,7 +45,7 @@ const App: React.FC = () => (
 					name="exercises"
 					options={{
 						title: 'Exercises',
-						headerRight: () => <PageHeaderRightButton title="Add new" page="exercise" />,
+						headerRight: () => <PageHeaderNewEntityButton title="Add new" page="exercise" />,
 					}}
 					component={ExercisesPage}
 				/>
