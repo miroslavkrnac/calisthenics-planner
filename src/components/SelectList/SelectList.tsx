@@ -4,18 +4,7 @@ import { Text } from '@components/Text';
 import { palette } from '@colors/palette';
 import { Button } from '@components/Button';
 import { logError } from '@utils';
-
-export interface OptionType {
-	value: string;
-	label: string;
-}
-
-interface SelectListProps {
-	trigger: React.FC<{ onPress: VoidFunction }>;
-	title: string;
-	options: OptionType[] | (() => Promise<OptionType[]>);
-	onSelect?: (value: string, label: string) => void;
-}
+import type { SelectListProps, OptionType } from './SelectList.types';
 
 export const SelectList: React.FC<SelectListProps> = ({ trigger: TriggerCom, title, options, onSelect }) => {
 	const [modalVisible, setModalVisible] = useState(false);
@@ -31,7 +20,7 @@ export const SelectList: React.FC<SelectListProps> = ({ trigger: TriggerCom, tit
 		options()
 			.then((data) => setSelectOptions(data))
 			.catch(logError);
-	}, []);
+	}, [JSON.stringify(options)]);
 
 	const handleSelect = (value: string, label: string): void => {
 		onSelect?.(value, label);

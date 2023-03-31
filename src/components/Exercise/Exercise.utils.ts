@@ -1,5 +1,5 @@
-import type { OptionType } from '@components/SelectList';
-import type { Exercise } from './Exercise.types';
+import type { OptionType } from '@components/SelectList/SelectList.types';
+import type { Exercise } from '@stores/exercises/store.types';
 
 export const mapExerciseToOption = (exercise: Exercise): OptionType => ({
 	value: exercise.id,

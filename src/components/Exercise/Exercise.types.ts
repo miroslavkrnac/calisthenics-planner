@@ -1,7 +1,4 @@
-export interface Exercise {
-	id: string;
-	name: string;
-}
+import type { Exercise } from '@stores/exercises/store.types';
 
 export interface ExerciseProps extends Exercise {
 	isFirst: boolean;

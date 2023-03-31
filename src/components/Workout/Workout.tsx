@@ -1,13 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Icon } from '@components/Icon';
-import type { OptionType } from '@components/SelectList';
 import { SelectList } from '@components/SelectList';
 import { View, StyleSheet, FlatList } from 'react-native';
-import { getExercises } from '@components/ExercisesList';
 import { mapExerciseToOption } from '@components/Exercise';
 import { palette } from '@colors/palette';
 import { Text } from '@components/Text';
-import { getFullDate } from '@utils';
+import { getFullDate, logError } from '@utils';
+import { useExercisesStore } from '@stores/exercises/store';
 import { WorkoutExercise } from './WorkoutExercise';
 import { useWorkout } from './context/useWorkout';
 
@@ -15,17 +14,17 @@ const ModalTrigger: React.FC<any> = ({ onPress }) => (
 	<Icon name="dumbbell" provider="fontAwesome5" size={30} onPress={onPress} style={styles.addExercise} />
 );
 
-const getOptions = async (): Promise<OptionType[]> => {
-	const exercises = await getExercises();
-
-	return exercises.map(mapExerciseToOption);
-};
-
 export const Workout: React.FC = () => {
 	const {
 		addExercise,
 		workout: { exercises, startDate },
 	} = useWorkout();
+
+	const { fetchExercises, exercises: allExercises } = useExercisesStore();
+
+	useEffect(() => {
+		fetchExercises().catch(logError);
+	}, []);
 
 	return (
 		<>
@@ -34,7 +33,7 @@ export const Workout: React.FC = () => {
 				<SelectList
 					title="Select exercise"
 					trigger={ModalTrigger}
-					options={getOptions}
+					options={allExercises.map(mapExerciseToOption)}
 					onSelect={addExercise}
 				/>
 			</View>

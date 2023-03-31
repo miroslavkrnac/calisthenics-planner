@@ -2,23 +2,22 @@ import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Button } from '@components/Button';
 import { Form } from '@components/Form';
-import { getStorageItem, storeData } from '@utils/storage';
 import { TextInput } from '@components/TextInput';
 import { logError } from '@utils/log';
 import { useNavigation } from '@react-navigation/native';
-import type { Exercise } from './Exercise/Exercise.types';
+import { useExercisesStore } from '@stores/exercises/store';
+import type { Exercise } from '@stores/exercises/store.types';
 
 interface ExerciseFormProps {
 	initialValues: Exercise;
 	isNew: boolean;
 }
 
-const STORAGE_KEY = 'exercises';
-
 export const ExerciseForm: React.FC<ExerciseFormProps> = ({ initialValues, isNew }) => {
 	const [form, setForm] = useState(initialValues);
 	const [saving, setSaving] = useState(false);
 	const { navigate } = useNavigation();
+	const { editExercise, addExercise } = useExercisesStore();
 
 	const handleChange = (name: string) => (value: string) => {
 		setForm({ ...form, [name]: value });
@@ -30,12 +29,7 @@ export const ExerciseForm: React.FC<ExerciseFormProps> = ({ initialValues, isNew
 				return;
 			}
 
-			const exercises = await getStorageItem<Exercise[]>(STORAGE_KEY, []);
-			const filteredExercises = exercises.filter((exercise) => exercise.id !== form.id);
-
-			const mergedExercises = [...filteredExercises, form];
-
-			await storeData(STORAGE_KEY, mergedExercises);
+			isNew ? await addExercise(form) : await editExercise(form);
 
 			navigate('exercises');
 		} catch (e) {
