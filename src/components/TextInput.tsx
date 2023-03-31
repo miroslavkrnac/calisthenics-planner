@@ -1,19 +1,20 @@
 import React from 'react';
-import type { TextInputProps as TextInputNativeProps } from 'react-native';
+import type { StyleProp, TextInputProps as TextInputNativeProps, ViewStyle } from 'react-native';
 import { View, TextInput as TextInputNative, StyleSheet } from 'react-native';
 import { palette } from '@colors/palette';
 import { Text } from '@components/Text';
 
 interface TextInputProps extends TextInputNativeProps {
 	label?: string;
+	containerStyle?: StyleProp<ViewStyle>;
 }
 
-export const TextInput: React.FC<TextInputProps> = ({ style, label, ...props }) => (
-	<View>
+export const TextInput: React.FC<TextInputProps> = ({ style, label, containerStyle, ...props }) => (
+	<View style={containerStyle}>
 		{label && <Text style={styles.label}>{label}</Text>}
 		<TextInputNative
 			keyboardAppearance="dark"
-			style={[style, styles.input]}
+			style={[styles.input, style]}
 			placeholderTextColor={palette.textSecondary}
 			{...props}
 		/>

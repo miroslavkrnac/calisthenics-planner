@@ -7,11 +7,12 @@ import { palette } from '@colors/palette';
 import { Text } from '@components/Text';
 import { getFullDate, logError } from '@utils';
 import { useExercisesStore } from '@stores/exercises/store';
+import type { SelectListProps } from '@components/SelectList/SelectList.types';
 import { WorkoutExercise } from './WorkoutExercise';
 import { useWorkout } from './context/useWorkout';
 
-const ModalTrigger: React.FC<any> = ({ onPress }) => (
-	<Icon name="dumbbell" provider="fontAwesome5" size={30} onPress={onPress} style={styles.addExercise} />
+const ModalTrigger: SelectListProps['trigger'] = ({ onPress }) => (
+	<Icon name="dumbbell" provider="fontAwesome5" size={25} onPress={onPress} style={styles.addExercise} />
 );
 
 export const Workout: React.FC = () => {
@@ -53,13 +54,16 @@ export const Workout: React.FC = () => {
 const styles = StyleSheet.create({
 	addExercise: {
 		color: palette.textPrimary,
+		marginLeft: 'auto',
 	},
 	titleContainer: {
 		flexDirection: 'row',
-		justifyContent: 'space-around',
 		alignItems: 'center',
 		marginTop: 15,
 		marginBottom: 15,
+		paddingBottom: 15,
+		borderBottomColor: palette.borderSecondary,
+		borderBottomWidth: 1,
 	},
 	titleText: {
 		fontSize: 20,

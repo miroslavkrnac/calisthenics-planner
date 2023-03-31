@@ -1,6 +1,6 @@
 import { randomString } from '@utils';
 import React, { useState } from 'react';
-import type { WorkoutProviderProps, WorkoutState } from './WorkoutProvider.types';
+import type { UpdateRepPayload, WorkoutProviderProps, WorkoutState } from './WorkoutProvider.types';
 import type { WorkoutType } from '../Workout.types';
 
 export const WorkoutContext = React.createContext<WorkoutState | undefined>(undefined);
@@ -35,6 +35,32 @@ export const WorkoutProvider: FCC<WorkoutProviderProps> = ({ children, workout: 
 		}));
 	};
 
+	const updateRep = ({ exerciseId, repId, weight, count }: UpdateRepPayload): void => {
+		setWorkout((w) => ({
+			...w,
+			exercises: w.exercises.map((exercise) => {
+				if (exercise.id === exerciseId) {
+					return {
+						...exercise,
+						reps: exercise.reps.map((rep) => {
+							if (rep.id === repId) {
+								return {
+									...rep,
+									weight: weight ?? rep.weight,
+									count: count ?? rep.count,
+								};
+							}
+
+							return rep;
+						}),
+					};
+				}
+
+				return exercise;
+			}),
+		}));
+	};
+
 	const removeExercise = (exerciseId: string): void => {
 		setWorkout((prev) => ({
 			...prev,
@@ -59,7 +85,7 @@ export const WorkoutProvider: FCC<WorkoutProviderProps> = ({ children, workout: 
 	};
 
 	return (
-		<WorkoutContext.Provider value={{ workout, addRep, removeExercise, removeExerciseRep, addExercise }}>
+		<WorkoutContext.Provider value={{ workout, addRep, removeExercise, removeExerciseRep, addExercise, updateRep }}>
 			{children}
 		</WorkoutContext.Provider>
 	);
