@@ -31,7 +31,7 @@ export const WorkoutRep: React.FC<WorkoutRepProps> = ({ count, id, weight, exerc
 			<Icon
 				provider="antDesign"
 				name="delete"
-				size={25}
+				size={20}
 				onPress={() => removeExerciseRep(exerciseId, id)}
 				style={styles.deleteIcon}
 			/>

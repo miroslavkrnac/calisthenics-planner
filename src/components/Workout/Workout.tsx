@@ -14,7 +14,7 @@ import { WorkoutExercise } from './WorkoutExercise';
 import { useWorkout } from './context/useWorkout';
 
 const ModalTrigger: SelectListProps['trigger'] = ({ onPress }) => (
-	<Icon name="dumbbell" provider="fontAwesome5" size={25} onPress={onPress} style={styles.addExercise} />
+	<Icon name="add-circle-outline" provider="ionicons" size={25} onPress={onPress} style={styles.addExercise} />
 );
 
 export const Workout: React.FC = () => {

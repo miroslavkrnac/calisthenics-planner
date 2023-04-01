@@ -28,7 +28,7 @@ export const WorkoutExercise: React.FC<WorkoutExerciseProps> = ({ id, name, reps
 						<Icon
 							provider="antDesign"
 							name="addfolder"
-							size={30}
+							size={20}
 							onPress={() => addRep(id)}
 							style={styles.addExerciseIcon}
 						/>
