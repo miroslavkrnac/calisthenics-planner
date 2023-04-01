@@ -1,9 +1,9 @@
 import React from 'react';
-import { Text } from '@components/Text';
 import { Page } from '@components/Page';
+import { WorkoutsSummary } from '@components/WorkoutsSummary';
 
 export const WorkoutsPage: React.FC = () => (
 	<Page>
-		<Text>WorkoutsPage</Text>
+		<WorkoutsSummary />
 	</Page>
 );

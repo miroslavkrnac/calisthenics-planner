@@ -4,13 +4,13 @@ export const getWeekDay = (date: Date): string => {
 	return days[date.getDay()];
 };
 
-export const getDate = (date: Date): string =>
-	date.toLocaleString('cs-Cz', {
+export const getDate = (date = new Date(), locale = 'cs-Cz'): string =>
+	date.toLocaleString(locale, {
 		dateStyle: 'short',
 	});
 
-export const getTime = (date: Date): string =>
-	date.toLocaleString('cs-Cz', {
+export const getTime = (date = new Date(), locale = 'cs-Cz'): string =>
+	date.toLocaleString(locale, {
 		timeStyle: 'short',
 	});
 
