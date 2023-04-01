@@ -10,6 +10,7 @@ import { useExercisesStore } from '@stores/exercises/store';
 import type { SelectListProps } from '@components/SelectList/SelectList.types';
 import { useNavigation } from '@react-navigation/native';
 import { PageHeaderRightButton } from '@components/Navigation';
+import { useWorkoutsStore } from '@stores/workouts/store';
 import { WorkoutExercise } from './WorkoutExercise';
 import { useWorkout } from './context/useWorkout';
 
@@ -19,19 +20,16 @@ const ModalTrigger: SelectListProps['trigger'] = ({ onPress }) => (
 
 export const Workout: React.FC = () => {
 	const { fetchExercises, exercises: allExercises } = useExercisesStore();
+	const { saveWorkout } = useWorkoutsStore();
 
 	const { addExercise, workout } = useWorkout();
 	const { exercises, startDate } = workout;
 
 	const navigation = useNavigation();
 
-	const handleSave = (): void => {
-		console.log(JSON.stringify(workout, null, 4));
-	};
-
 	useEffect(() => {
 		navigation.setOptions({
-			headerRight: () => <PageHeaderRightButton title="Save" onPress={handleSave} />,
+			headerRight: () => <PageHeaderRightButton title="Save" onPress={() => saveWorkout(workout)} />,
 		});
 	}, [navigation, workout]);
 

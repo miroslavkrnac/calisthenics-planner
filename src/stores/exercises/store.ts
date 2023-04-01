@@ -26,7 +26,7 @@ export const useExercisesStore = create<ExercisesStore>()(
 			set({ exercises: filteredExercises, loading: false });
 		},
 
-		addExercise: async (exercise: Exercise) => {
+		saveExercise: async (exercise: Exercise) => {
 			const { exercises } = get();
 			const exerciseExists = exercises.some((e) => e.name === exercise.name);
 
@@ -65,11 +65,15 @@ export const useExercisesStore = create<ExercisesStore>()(
 		fetchExercises: async () => {
 			set({ loading: true });
 
-			const response = await getExercises();
+			try {
+				const response = await getExercises();
 
-			set({ exercises: response, loading: false });
+				set({ exercises: response, loading: false });
+			} catch (e) {
+				logError(e as Error);
 
-			return response;
+				set({ loading: false });
+			}
 		},
 	})),
 );

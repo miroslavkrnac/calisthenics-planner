@@ -1,44 +1,36 @@
 import React, { useEffect, useState } from 'react';
 import { Form } from '@components/Form';
 import { TextInput } from '@components/TextInput';
-import { logError } from '@utils/log';
 import { useNavigation } from '@react-navigation/native';
-import { useExercisesStore } from '@stores/exercises/store';
 import type { Exercise } from '@stores/exercises/store.types';
 import { PageHeaderRightButton } from './Navigation';
 
 interface ExerciseFormProps {
 	initialValues: Exercise;
 	isNew: boolean;
+	onSubmit: (values: Exercise) => void;
 }
 
-export const ExerciseForm: React.FC<ExerciseFormProps> = ({ initialValues, isNew }) => {
-	const { editExercise, addExercise } = useExercisesStore();
+export const ExerciseForm: React.FC<ExerciseFormProps> = ({ initialValues, isNew, onSubmit }) => {
 	const [form, setForm] = useState(initialValues);
 	const navigation = useNavigation();
 
+	const handleSubmit = (): void => {
+		if (!form.name.length) {
+			return;
+		}
+
+		onSubmit(form);
+	};
+
 	useEffect(() => {
 		navigation.setOptions({
-			headerRight: () => <PageHeaderRightButton title={isNew ? 'Create' : 'Save'} onPress={handlePress} />,
+			headerRight: () => <PageHeaderRightButton title={isNew ? 'Create' : 'Save'} onPress={handleSubmit} />,
 		});
 	}, [navigation, form]);
 
 	const handleChange = (name: string) => (value: string) => {
 		setForm({ ...form, [name]: value });
-	};
-
-	const handlePress = async (): Promise<void> => {
-		try {
-			if (!form.name.length) {
-				return;
-			}
-
-			isNew ? await addExercise(form) : await editExercise(form);
-
-			navigation.navigate('exercises');
-		} catch (e) {
-			logError(e as Error);
-		}
 	};
 
 	return (

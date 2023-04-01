@@ -19,6 +19,13 @@ export const WorkoutProvider: FCC<WorkoutProviderProps> = ({ children, workout: 
 		}));
 	};
 
+	const removeExercise = (exerciseId: string): void => {
+		setWorkout((prev) => ({
+			...prev,
+			exercises: prev.exercises.filter((exercise) => exercise.id !== exerciseId),
+		}));
+	};
+
 	const addRep = (exerciseId: string): void => {
 		setWorkout((w) => ({
 			...w,
@@ -27,6 +34,28 @@ export const WorkoutProvider: FCC<WorkoutProviderProps> = ({ children, workout: 
 					return {
 						...exercise,
 						reps: [...exercise.reps, createDefaultRep()],
+					};
+				}
+
+				return exercise;
+			}),
+		}));
+	};
+
+	const removeExerciseRep = (exerciseId: string, repId: string): void => {
+		const hasOnlyOneRep = workout.exercises.find((exercise) => exercise.id === exerciseId)?.reps.length === 1;
+
+		if (hasOnlyOneRep) {
+			return;
+		}
+
+		setWorkout((w) => ({
+			...w,
+			exercises: w.exercises.map((exercise) => {
+				if (exercise.id === exerciseId) {
+					return {
+						...exercise,
+						reps: exercise.reps.filter((rep) => rep.id !== repId),
 					};
 				}
 
@@ -53,29 +82,6 @@ export const WorkoutProvider: FCC<WorkoutProviderProps> = ({ children, workout: 
 
 							return rep;
 						}),
-					};
-				}
-
-				return exercise;
-			}),
-		}));
-	};
-
-	const removeExercise = (exerciseId: string): void => {
-		setWorkout((prev) => ({
-			...prev,
-			exercises: prev.exercises.filter((exercise) => exercise.id !== exerciseId),
-		}));
-	};
-
-	const removeExerciseRep = (exerciseId: string, repId: string): void => {
-		setWorkout((w) => ({
-			...w,
-			exercises: w.exercises.map((exercise) => {
-				if (exercise.id === exerciseId) {
-					return {
-						...exercise,
-						reps: exercise.reps.filter((rep) => rep.id !== repId),
 					};
 				}
 

@@ -2,10 +2,10 @@ export interface ExercisesStore {
 	exercises: Exercise[];
 	loading: boolean;
 
-	addExercise: (exercise: Exercise) => Promise<void>;
+	saveExercise: (exercise: Exercise) => Promise<void>;
 	removeExercise: (id: string) => Promise<void>;
-	fetchExercises: () => Promise<Exercise[]>;
 	editExercise: (exercise: Exercise) => Promise<void>;
+	fetchExercises: () => Promise<void>;
 }
 
 export interface Exercise {
