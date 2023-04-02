@@ -39,7 +39,7 @@ const App: React.FC = () => (
 					name="workouts"
 					options={{
 						title: 'Workouts',
-						headerRight: () => <PageHeaderNewEntityButton title="Add new" page="workout" />,
+						headerRight: () => <PageHeaderNewEntityButton title="Start workout" page="workout" />,
 					}}
 					component={WorkoutsPage}
 				/>

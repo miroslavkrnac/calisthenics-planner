@@ -3,11 +3,10 @@ import { Calendar } from 'react-native-calendars';
 import type { Theme } from 'react-native-calendars/src/types';
 import { palette } from '@colors/palette';
 import { useWorkoutsStore } from '@stores/workouts/store';
-import { getCalendarDate, getTime, logError } from '@utils';
+import { getCalendarDate, logError } from '@utils';
 import dayjs from 'dayjs';
-import { FlatList } from 'react-native';
-import { Text } from '@components/Text';
 import { mapWorkoutsForCalendar } from './WorkoutsSummary.utils';
+import { WorkoutsSummaryList } from './WorkoutsSummaryList/WorkoutsSummaryList';
 
 dayjs().format('YYYY-MM-DD');
 
@@ -16,7 +15,6 @@ export const WorkoutsSummary: React.FC = () => {
 	const { workouts, fetchWorkouts } = useWorkoutsStore();
 
 	const markedDates = mapWorkoutsForCalendar(workouts, selectedDate);
-	const selectedWorkouts = workouts.filter(({ startDate }) => getCalendarDate(startDate) === selectedDate);
 
 	useEffect(() => {
 		fetchWorkouts().catch(logError);
@@ -35,16 +33,7 @@ export const WorkoutsSummary: React.FC = () => {
 					setSelectedDate(day.dateString);
 				}}
 			/>
-			<FlatList
-				data={selectedWorkouts}
-				renderItem={({ item: { startDate, endDate } }) => (
-					<Text>
-						{getTime(startDate)} - {getTime(endDate)}
-					</Text>
-				)}
-				keyExtractor={({ id }) => id}
-				showsVerticalScrollIndicator={false}
-			/>
+			<WorkoutsSummaryList selectedDate={selectedDate} />
 		</>
 	);
 };
