@@ -26,7 +26,7 @@ export const useExercisesStore = create<ExercisesStore>()(
 			set({ exercises: filteredExercises, loading: false });
 		},
 
-		saveExercise: async (exercise: Exercise) => {
+		createNewExercise: async (exercise: Exercise) => {
 			const { exercises } = get();
 			const exerciseExists = exercises.some((e) => e.name === exercise.name);
 

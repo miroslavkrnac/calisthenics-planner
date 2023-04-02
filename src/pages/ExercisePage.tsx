@@ -11,7 +11,7 @@ import type { Exercise } from '@stores/exercises/store.types';
 
 export const ExercisePage: React.FC = () => {
 	const { params } = useRoute<RouteProp<'exercise'>>();
-	const { exercises, editExercise, saveExercise } = useExercisesStore();
+	const { exercises, editExercise, createNewExercise } = useExercisesStore();
 	const navigation = useNavigation();
 
 	useSetEntityStateTitle();
@@ -22,7 +22,7 @@ export const ExercisePage: React.FC = () => {
 
 	const handleSubmit = async (values: Exercise): Promise<void> => {
 		try {
-			isNew ? await saveExercise(values) : await editExercise(values);
+			isNew ? await createNewExercise(values) : await editExercise(values);
 
 			navigation.navigate('exercises');
 		} catch (e) {

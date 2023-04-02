@@ -6,3 +6,8 @@ export interface WorkoutType {
 	endDate?: string;
 	exercises: WorkoutExercise[];
 }
+
+export interface WorkoutProps {
+	isNew: boolean;
+	onSave: (workout: WorkoutType) => void;
+}

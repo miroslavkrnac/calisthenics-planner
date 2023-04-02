@@ -6,40 +6,31 @@ import { palette } from '@colors/palette';
 import { Text } from '@components/Text';
 import { getFullDate, logError } from '@utils';
 import { useExercisesStore } from '@stores/exercises/store';
-import { useNavigation } from '@react-navigation/native';
 import { PageHeaderRightButton } from '@components/Navigation';
-import { useWorkoutsStore } from '@stores/workouts/store';
+import { useNavigation } from '@react-navigation/native';
 import { WorkoutExercise } from './WorkoutExercise';
 import { useWorkout } from './context/useWorkout';
 import { AddWorkoutExercise } from './WorkoutActions';
+import type { WorkoutProps } from './Workout.types';
 
-export const Workout: React.FC = () => {
+export const Workout: React.FC<WorkoutProps> = ({ isNew, onSave }) => {
 	const { fetchExercises, exercises: allExercises } = useExercisesStore();
-	const { saveWorkout } = useWorkoutsStore();
+	const navigation = useNavigation();
 
 	const { addExercise, workout } = useWorkout();
 	const { exercises, startDate } = workout;
 
-	const navigation = useNavigation();
-
-	const handleSaveWorkout = async (): Promise<void> => {
-		try {
-			await saveWorkout(workout);
-			navigation.navigate('workouts');
-		} catch (e) {
-			logError(e as Error);
-		}
-	};
-
-	useEffect(() => {
-		navigation.setOptions({
-			headerRight: () => <PageHeaderRightButton title="Save" onPress={handleSaveWorkout} />,
-		});
-	}, [navigation, workout]);
-
 	useEffect(() => {
 		fetchExercises().catch(logError);
 	}, []);
+
+	useEffect(() => {
+		navigation.setOptions({
+			headerRight: () => (
+				<PageHeaderRightButton title={isNew ? 'Create' : 'Save'} onPress={() => onSave(workout)} />
+			),
+		});
+	}, [navigation, workout]);
 
 	return (
 		<>

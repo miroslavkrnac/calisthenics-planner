@@ -11,7 +11,7 @@ export const useWorkoutsStore = create<WorkoutsStore>()(
 		workouts: [],
 		loading: false,
 
-		saveWorkout: async (workout: WorkoutType) => {
+		createNewWorkout: async (workout: WorkoutType) => {
 			set({ loading: true });
 
 			const { workouts } = get();
