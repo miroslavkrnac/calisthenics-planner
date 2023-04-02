@@ -1,10 +1,10 @@
-import { randomString } from '@utils';
+import { isoString, randomString } from '@utils';
 import type { WorkoutType } from './Workout.types';
 import type { WorkoutRep } from './WorkoutExercise/WorkoutExercise.types';
 
 export const createDefaultWorkout = (): WorkoutType => ({
 	id: randomString(),
-	startDate: new Date().toString(),
+	startDate: isoString(),
 	endDate: undefined,
 	exercises: [],
 });

@@ -44,7 +44,7 @@ export const Workout: React.FC = () => {
 	return (
 		<>
 			<View style={styles.titleContainer}>
-				<Text style={styles.titleText}>{getFullDate(new Date(startDate))}</Text>
+				<Text style={styles.titleText}>{getFullDate(startDate)}</Text>
 				<SelectList
 					title="Select exercise"
 					trigger={AddWorkoutExercise}

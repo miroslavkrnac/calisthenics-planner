@@ -1,5 +1,5 @@
 import type { WorkoutType } from '@components/Workout/Workout.types';
-import { logError, storeData } from '@utils';
+import { isoString, logError, storeData } from '@utils';
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 import { WORKOUTS_STORAGE_KEY } from './store.const';
@@ -21,7 +21,11 @@ export const useWorkoutsStore = create<WorkoutsStore>()(
 				return;
 			}
 
-			const newWorkouts = [...workouts, workout];
+			const workoutWithEndDate = {
+				...workout,
+				endDate: isoString(),
+			};
+			const newWorkouts = [...workouts, workoutWithEndDate];
 
 			try {
 				await storeData(WORKOUTS_STORAGE_KEY, newWorkouts);
