@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { Icon } from '@components/Icon';
 import { SelectList } from '@components/SelectList';
 import { View, StyleSheet, FlatList } from 'react-native';
 import { mapExerciseToOption } from '@components/Exercise';
@@ -7,16 +6,12 @@ import { palette } from '@colors/palette';
 import { Text } from '@components/Text';
 import { getFullDate, logError } from '@utils';
 import { useExercisesStore } from '@stores/exercises/store';
-import type { SelectListProps } from '@components/SelectList/SelectList.types';
 import { useNavigation } from '@react-navigation/native';
 import { PageHeaderRightButton } from '@components/Navigation';
 import { useWorkoutsStore } from '@stores/workouts/store';
 import { WorkoutExercise } from './WorkoutExercise';
 import { useWorkout } from './context/useWorkout';
-
-const ModalTrigger: SelectListProps['trigger'] = ({ onPress }) => (
-	<Icon name="add-circle-outline" provider="ionicons" size={25} onPress={onPress} style={styles.addExercise} />
-);
+import { AddWorkoutExercise } from './WorkoutActions';
 
 export const Workout: React.FC = () => {
 	const { fetchExercises, exercises: allExercises } = useExercisesStore();
@@ -52,7 +47,7 @@ export const Workout: React.FC = () => {
 				<Text style={styles.titleText}>{getFullDate(new Date(startDate))}</Text>
 				<SelectList
 					title="Select exercise"
-					trigger={ModalTrigger}
+					trigger={AddWorkoutExercise}
 					options={allExercises.map(mapExerciseToOption)}
 					onSelect={addExercise}
 				/>
@@ -71,10 +66,6 @@ export const Workout: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
-	addExercise: {
-		color: palette.textPrimary,
-		marginLeft: 'auto',
-	},
 	titleContainer: {
 		flexDirection: 'row',
 		alignItems: 'center',
