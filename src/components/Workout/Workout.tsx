@@ -27,9 +27,18 @@ export const Workout: React.FC = () => {
 
 	const navigation = useNavigation();
 
+	const handleSaveWorkout = async (): Promise<void> => {
+		try {
+			await saveWorkout(workout);
+			navigation.navigate('workouts');
+		} catch (e) {
+			logError(e as Error);
+		}
+	};
+
 	useEffect(() => {
 		navigation.setOptions({
-			headerRight: () => <PageHeaderRightButton title="Save" onPress={() => saveWorkout(workout)} />,
+			headerRight: () => <PageHeaderRightButton title="Save" onPress={handleSaveWorkout} />,
 		});
 	}, [navigation, workout]);
 
