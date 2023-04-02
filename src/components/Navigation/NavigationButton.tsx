@@ -60,7 +60,8 @@ const styles = StyleSheet.create({
 		height: '100%',
 	},
 	text: {
-		marginTop: 3,
 		fontSize: 10,
+		position: 'absolute',
+		top: 38,
 	},
 });
