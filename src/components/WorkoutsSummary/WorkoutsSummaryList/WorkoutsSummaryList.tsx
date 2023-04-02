@@ -1,8 +1,10 @@
 import { useNavigation } from '@react-navigation/native';
 import { useWorkoutsStore } from '@stores/workouts/store';
-import { getCalendarDate, logError } from '@utils';
+import { DATE_TIME_FORMATS, format, getCalendarDate, logError } from '@utils';
 import React from 'react';
 import { FlatList, StyleSheet } from 'react-native';
+import { Text } from '@components/Text';
+import { palette } from '@colors/palette';
 import { WorkoutsSummaryListItem } from '../WorkoutSummaryListItem/WorkoutSummaryListItem';
 import type { WorkoutSummaryListProps } from './WorkoutSummaryList.types';
 
@@ -20,26 +22,37 @@ export const WorkoutsSummaryList: React.FC<WorkoutSummaryListProps> = ({ selecte
 	};
 
 	return (
-		<FlatList
-			style={styles.list}
-			data={selectedWorkouts}
-			renderItem={({ item: workout, index }) => (
-				<WorkoutsSummaryListItem
-					isFirst={index === 0}
-					isLast={index === selectedWorkouts.length - 1}
-					workout={workout}
-					onEdit={() => handleEdit(workout.id)}
-					onDelete={() => handleDelete(workout.id)}
+		<>
+			<Text style={styles.header}>Workouts on: {format(selectedDate, DATE_TIME_FORMATS.DATE_SYSTEM)}</Text>
+			{!selectedWorkouts.length ? (
+				<Text style={styles.noWorkouts}>There are no workouts yet</Text>
+			) : (
+				<FlatList
+					data={selectedWorkouts}
+					renderItem={({ item: workout, index }) => (
+						<WorkoutsSummaryListItem
+							isFirst={index === 0}
+							isLast={index === selectedWorkouts.length - 1}
+							workout={workout}
+							onEdit={() => handleEdit(workout.id)}
+							onDelete={() => handleDelete(workout.id)}
+						/>
+					)}
+					keyExtractor={({ id }) => id}
+					showsVerticalScrollIndicator={false}
 				/>
 			)}
-			keyExtractor={({ id }) => id}
-			showsVerticalScrollIndicator={false}
-		/>
+		</>
 	);
 };
 
 const styles = StyleSheet.create({
-	list: {
-		marginTop: 30,
+	header: {
+		fontSize: 18,
+		fontWeight: 'bold',
+		marginBottom: 10,
+	},
+	noWorkouts: {
+		color: palette.textSecondary,
 	},
 });
