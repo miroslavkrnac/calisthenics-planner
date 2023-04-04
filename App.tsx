@@ -39,7 +39,6 @@ const App: React.FC = () => (
 					name="workouts"
 					options={{
 						title: 'Workouts',
-						headerRight: () => <PageHeaderNewEntityButton title="Start workout" page="workout" />,
 					}}
 					component={WorkoutsPage}
 				/>

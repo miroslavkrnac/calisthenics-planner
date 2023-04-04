@@ -13,11 +13,11 @@ import type { WorkoutType } from '@components/Workout/Workout.types';
 
 export const WorkoutPage: React.FC = () => {
 	const { workouts, createNewWorkout, editWorkout } = useWorkoutsStore();
-	const { params } = useRoute<RouteProp<'exercise'>>();
+	const { params } = useRoute<RouteProp<'workout'>>();
 	const navigation = useNavigation();
 
 	const isNew = params.id === 'new';
-	const defaultWorkout = createDefaultWorkout();
+	const defaultWorkout = createDefaultWorkout({ startDate: params.startDate });
 	const workout = isNew ? defaultWorkout : workouts.find(({ id }) => id === params.id);
 
 	useSetEntityStateTitle();

@@ -11,3 +11,7 @@ export interface WorkoutProps {
 	isNew: boolean;
 	onSave: (workout: WorkoutType) => void;
 }
+
+export interface CreateDefaultWorkoutPayload {
+	startDate?: string;
+}

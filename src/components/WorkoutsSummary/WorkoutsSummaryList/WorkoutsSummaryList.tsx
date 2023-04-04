@@ -1,10 +1,11 @@
 import { useNavigation } from '@react-navigation/native';
 import { useWorkoutsStore } from '@stores/workouts/store';
 import { DATE_TIME_FORMATS, format, getCalendarDate, logError } from '@utils';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FlatList, StyleSheet } from 'react-native';
 import { Text } from '@components/Text';
 import { palette } from '@colors/palette';
+import { PageHeaderRightButton } from '@components/Navigation';
 import { WorkoutsSummaryListItem } from '../WorkoutSummaryListItem/WorkoutSummaryListItem';
 import type { WorkoutSummaryListProps } from './WorkoutSummaryList.types';
 
@@ -12,6 +13,8 @@ export const WorkoutsSummaryList: React.FC<WorkoutSummaryListProps> = ({ selecte
 	const { workouts, deleteWorkout } = useWorkoutsStore();
 	const navigation = useNavigation();
 	const selectedWorkouts = workouts.filter(({ startDate }) => getCalendarDate(startDate) === selectedDate);
+
+	const selectedIsToday = getCalendarDate() === selectedDate;
 
 	const handleEdit = (id: string): void => {
 		navigation.navigate('workout', { id });
@@ -21,9 +24,21 @@ export const WorkoutsSummaryList: React.FC<WorkoutSummaryListProps> = ({ selecte
 		deleteWorkout(id).catch(logError);
 	};
 
+	useEffect(() => {
+		navigation.setOptions({
+			headerRight: () => (
+				<PageHeaderRightButton
+					title={selectedIsToday ? 'Start workout' : 'Prepare workout'}
+					onPress={() => navigation.navigate('workout', { id: 'new', startDate: selectedDate })}
+				/>
+			),
+		});
+	}, [navigation, selectedDate]);
+
 	return (
 		<>
 			<Text style={styles.header}>Workouts on: {format(selectedDate, DATE_TIME_FORMATS.DATE_SYSTEM)}</Text>
+
 			{!selectedWorkouts.length ? (
 				<Text style={styles.noWorkouts}>There are no workouts yet</Text>
 			) : (
