@@ -1,3 +1,4 @@
+import type { WorkoutType } from '@components/Workout/Workout.types';
 import type { RouteProp as RoutePropNative } from '@react-navigation/native';
 
 export type EntityRouteTypes = 'new' | 'edit';
@@ -7,7 +8,8 @@ export type Routes = {
 	exercises: undefined;
 	exercise: { id: string };
 	workouts: undefined;
-	workout: { id: string; startDate?: string };
+	// @NOTE better
+	workout: Partial<Omit<WorkoutType, 'id'>> & { id: string };
 };
 
 export type RoutesNames = keyof Routes;

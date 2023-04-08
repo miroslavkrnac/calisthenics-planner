@@ -5,11 +5,8 @@ import { StyleSheet } from 'react-native';
 import { palette } from '@colors/palette';
 import { useWorkoutsStore } from '@stores/workouts/store';
 import { getCalendarDate, logError } from '@utils';
-import dayjs from 'dayjs';
 import { mapWorkoutsForCalendar } from './WorkoutsSummary.utils';
 import { WorkoutsSummaryList } from './WorkoutsSummaryList/WorkoutsSummaryList';
-
-dayjs().format('YYYY-MM-DD');
 
 export const WorkoutsSummary: React.FC = () => {
 	const [selectedDate, setSelectedDate] = useState<string>(getCalendarDate());

@@ -8,7 +8,6 @@ export interface WorkoutType {
 }
 
 export interface WorkoutProps {
-	isNew: boolean;
 	onSave: (workout: WorkoutType) => void;
 }
 

@@ -72,9 +72,9 @@ export const useWorkoutsStore = create<WorkoutsStore>()(
 			set({ loading: true });
 
 			try {
-				const response = await getWorkouts();
+				const workouts = await getWorkouts();
 
-				set({ workouts: response, loading: false });
+				set({ workouts, loading: false });
 			} catch (e) {
 				logError(e as Error);
 				set({ loading: false });

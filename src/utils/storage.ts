@@ -21,3 +21,5 @@ export const storeData = async (key: string, value: any): Promise<boolean> => {
 		return false;
 	}
 };
+
+export const removeStorageItem = (key: string): Promise<void> => AsyncStorage.removeItem(key);

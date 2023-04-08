@@ -13,7 +13,7 @@ import { useWorkout } from './context/useWorkout';
 import { AddWorkoutExercise } from './WorkoutActions';
 import type { WorkoutProps } from './Workout.types';
 
-export const Workout: React.FC<WorkoutProps> = ({ isNew, onSave }) => {
+export const Workout: React.FC<WorkoutProps> = ({ onSave }) => {
 	const { fetchExercises, exercises: allExercises } = useExercisesStore();
 	const navigation = useNavigation();
 
@@ -24,11 +24,13 @@ export const Workout: React.FC<WorkoutProps> = ({ isNew, onSave }) => {
 		fetchExercises().catch(logError);
 	}, []);
 
+	const handleSave = (): void => {
+		onSave(workout);
+	};
+
 	useEffect(() => {
 		navigation.setOptions({
-			headerRight: () => (
-				<PageHeaderRightButton title={isNew ? 'Create' : 'Save'} onPress={() => onSave(workout)} />
-			),
+			headerRight: () => <PageHeaderRightButton title="Save" onPress={handleSave} />,
 		});
 	}, [navigation, workout]);
 
