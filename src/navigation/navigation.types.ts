@@ -12,5 +12,7 @@ export type Routes = {
 	workout: Partial<Omit<WorkoutType, 'id'>> & { id: string };
 };
 
+export type ParentRoutes = 'home' | 'exercises' | 'workouts';
+
 export type RoutesNames = keyof Routes;
 export type RouteProp<T extends keyof Routes> = RoutePropNative<Routes, T>;

@@ -6,7 +6,7 @@ import { WorkoutProvider } from '@components/Workout/context/WorkoutProvider';
 import { createDefaultWorkout } from '@components/Workout/Workout.utils';
 import { Text } from '@components/Text';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import type { RouteProp } from '@navigation/types';
+import type { RouteProp } from '@navigation/navigation.types';
 import { useWorkoutsStore } from '@stores/workouts/store';
 import { logError } from '@utils';
 import type { WorkoutType } from '@components/Workout/Workout.types';
@@ -37,7 +37,7 @@ export const WorkoutPage: React.FC = () => {
 				<Text>Loading...</Text>
 			) : (
 				<WorkoutProvider workout={workout}>
-					<Workout isNew={isNew} onSave={handleSaveWorkout} />
+					<Workout onSave={handleSaveWorkout} />
 				</WorkoutProvider>
 			)}
 		</Page>

@@ -3,7 +3,7 @@ import React from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { palette } from '@colors/palette';
 import { Text } from '@components/Text';
-import type { Routes, RoutesNames } from '@navigation/types';
+import type { Routes, RoutesNames } from '@navigation/navigation.types';
 import type { IconProps } from '../Icon';
 import { Icon } from '../Icon';
 
@@ -14,7 +14,6 @@ interface NavigationButtonProps<RouteName extends RoutesNames> {
 	iconProvider: IconProps['provider'];
 	label: string;
 	activeRoute: string;
-	onNavigation: (page: string) => void;
 }
 
 export const NavigationButton = <RouteName extends RoutesNames>({
@@ -23,7 +22,6 @@ export const NavigationButton = <RouteName extends RoutesNames>({
 	icon,
 	label,
 	activeRoute,
-	onNavigation,
 	pageParams,
 }: NavigationButtonProps<RouteName>): JSX.Element => {
 	const { navigate } = useNavigation();
@@ -31,7 +29,6 @@ export const NavigationButton = <RouteName extends RoutesNames>({
 	const handlePress = (): void => {
 		// necessary due to bad typing in react-navigation
 		navigate<any>(page, pageParams);
-		onNavigation(page);
 	};
 
 	return (

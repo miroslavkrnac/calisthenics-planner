@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import type { RouteProp } from '@navigation/types';
+import type { RouteProp } from '@navigation/navigation.types';
 import { Page } from '@components/Page';
 import { Text } from '@components/Text';
 import { ExerciseForm } from '@components/ExerciseForm';

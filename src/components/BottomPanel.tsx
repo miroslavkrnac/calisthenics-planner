@@ -1,35 +1,24 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { NavigationButton } from '@components/Navigation';
 import { palette } from '@colors/palette';
-import { INITIAL_ROUTE_NAME } from '@consts/navigation';
+
+import { useMenuStore } from '@stores/menu/store';
 
 export const BOTTOM_PANEL_HEIGHT = 100;
 
 export const BottomPanel: React.FC = () => {
-	const [activeRoute, setActiveRoute] = useState(INITIAL_ROUTE_NAME);
-
-	const handleNavigation = (page: string): void => {
-		setActiveRoute(page);
-	};
+	const { activeRoute } = useMenuStore();
 
 	return (
 		<View style={styles.panel}>
-			<NavigationButton
-				page="home"
-				iconProvider="ionicons"
-				icon="home"
-				label="Home"
-				activeRoute={activeRoute}
-				onNavigation={handleNavigation}
-			/>
+			<NavigationButton page="home" iconProvider="ionicons" icon="home" label="Home" activeRoute={activeRoute} />
 			<NavigationButton
 				page="workouts"
 				icon="dumbbell"
 				iconProvider="materialCommunityIcons"
 				label="Workouts"
 				activeRoute={activeRoute}
-				onNavigation={handleNavigation}
 			/>
 			<NavigationButton
 				page="exercises"
@@ -37,7 +26,6 @@ export const BottomPanel: React.FC = () => {
 				icon="list"
 				label="Exercises"
 				activeRoute={activeRoute}
-				onNavigation={handleNavigation}
 			/>
 		</View>
 	);

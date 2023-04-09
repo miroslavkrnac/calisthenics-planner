@@ -1,4 +1,4 @@
-import type { RouteProp } from '@navigation/types';
+import type { RouteProp } from '@navigation/navigation.types';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { useEffect } from 'react';
 
