@@ -4,7 +4,7 @@ import type { Theme } from 'react-native-calendars/src/types';
 import { StyleSheet } from 'react-native';
 import { palette } from '@colors/palette';
 import { useWorkoutsStore } from '@stores/workouts/store';
-import { getCalendarDate, logError } from '@utils';
+import { addTimeToDate, getCalendarDate, logError } from '@utils';
 import { mapWorkoutsForCalendar } from './WorkoutsSummary.utils';
 import { WorkoutsSummaryList } from './WorkoutsSummaryList/WorkoutsSummaryList';
 
@@ -28,7 +28,7 @@ export const WorkoutsSummary: React.FC = () => {
 				hideExtraDays
 				markedDates={markedDates}
 				onDayPress={(day) => {
-					setSelectedDate(day.dateString);
+					setSelectedDate(addTimeToDate(day.dateString));
 				}}
 				style={styles.calendar}
 			/>

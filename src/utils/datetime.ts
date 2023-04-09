@@ -21,3 +21,6 @@ export const getTime = (date: Date | string = new Date()): string => dayjs(date)
 
 export const getCalendarDate = (date: Date | string = new Date()): string =>
 	dayjs(date).format(DATE_TIME_FORMATS.DATE_CALENDAR);
+
+export const addTimeToDate = (date: Date | string = new Date()): string =>
+	dayjs(date).hour(dayjs().hour()).minute(dayjs().minute()).toISOString();

@@ -12,9 +12,11 @@ import type { WorkoutSummaryListProps } from './WorkoutSummaryList.types';
 export const WorkoutsSummaryList: React.FC<WorkoutSummaryListProps> = ({ selectedDate }) => {
 	const { workouts, deleteWorkout } = useWorkoutsStore();
 	const navigation = useNavigation();
-	const selectedWorkouts = workouts.filter(({ startDate }) => getCalendarDate(startDate) === selectedDate);
+	const selectedWorkouts = workouts.filter(
+		({ startDate }) => getCalendarDate(startDate) === getCalendarDate(selectedDate),
+	);
 
-	const selectedIsToday = getCalendarDate() === selectedDate;
+	const selectedIsToday = getCalendarDate() === getCalendarDate(selectedDate);
 
 	const handleEdit = (id: string): void => {
 		navigation.navigate('workout', { id });

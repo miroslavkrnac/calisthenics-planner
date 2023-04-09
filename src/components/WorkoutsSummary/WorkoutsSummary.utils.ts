@@ -3,8 +3,10 @@ import { getCalendarDate } from '@utils';
 import type { MarkedDates } from 'react-native-calendars/src/types';
 
 export const mapWorkoutsForCalendar = (workouts: WorkoutType[], selectedDate: string): MarkedDates => {
+	const calendarSelectedDate = getCalendarDate(selectedDate);
+
 	const mappedWorkouts: MarkedDates = {
-		[selectedDate]: { selected: true },
+		[calendarSelectedDate]: { selected: true },
 	};
 
 	workouts.forEach((workout) => {
@@ -13,7 +15,7 @@ export const mapWorkoutsForCalendar = (workouts: WorkoutType[], selectedDate: st
 
 		mappedWorkouts[calendarDate] = {
 			marked: true,
-			selected: calendarDate === selectedDate,
+			selected: calendarDate === calendarSelectedDate,
 		};
 	});
 

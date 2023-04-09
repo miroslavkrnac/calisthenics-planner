@@ -5,8 +5,8 @@ import type { WorkoutRep } from './WorkoutExercise/WorkoutExercise.types';
 
 export const createDefaultWorkout = ({ startDate, endDate, exercises, id }: Partial<WorkoutType>): WorkoutType => ({
 	startDate: isoString(startDate),
+	endDate: isoString(endDate),
 	id: !id || id === 'new' ? randomString() : id,
-	endDate: endDate ? isoString(endDate) : undefined,
 	exercises: exercises ?? [],
 });
 
