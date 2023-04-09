@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
 		marginBottom: 10,
 	},
 	header: {
-		fontSize: 25,
+		fontSize: 22,
 		fontWeight: '500',
 	},
 	repsContainer: {

@@ -3,7 +3,7 @@ import { logError } from '@utils';
 import { useEffect, useRef } from 'react';
 import type { WorkoutType } from '../Workout.types';
 
-const AUTOSAVE_INTERVAL = 5000;
+const AUTOSAVE_INTERVAL = 30000;
 
 export const useWorkoutAutosave = (workout?: WorkoutType): void => {
 	const { createOrEditWorkout } = useWorkoutsStore();
