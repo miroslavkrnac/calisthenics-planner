@@ -7,11 +7,10 @@ import { PageHeaderRightButton } from './Navigation';
 
 interface ExerciseFormProps {
 	initialValues: Exercise;
-	isNew: boolean;
 	onSubmit: (values: Exercise) => void;
 }
 
-export const ExerciseForm: React.FC<ExerciseFormProps> = ({ initialValues, isNew, onSubmit }) => {
+export const ExerciseForm: React.FC<ExerciseFormProps> = ({ initialValues, onSubmit }) => {
 	const [form, setForm] = useState(initialValues);
 	const navigation = useNavigation();
 
@@ -25,7 +24,7 @@ export const ExerciseForm: React.FC<ExerciseFormProps> = ({ initialValues, isNew
 
 	useEffect(() => {
 		navigation.setOptions({
-			headerRight: () => <PageHeaderRightButton title={isNew ? 'Create' : 'Save'} onPress={handleSubmit} />,
+			headerRight: () => <PageHeaderRightButton title="Save" onPress={handleSubmit} />,
 		});
 	}, [navigation, form]);
 

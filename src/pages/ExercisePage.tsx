@@ -11,7 +11,7 @@ import type { Exercise } from '@stores/exercises/store.types';
 
 export const ExercisePage: React.FC = () => {
 	const { params } = useRoute<RouteProp<'exercise'>>();
-	const { exercises, editExercise, createNewExercise } = useExercisesStore();
+	const { exercises, createOrUpdateExercise } = useExercisesStore();
 	const navigation = useNavigation();
 
 	useSetEntityStateTitle();
@@ -22,7 +22,7 @@ export const ExercisePage: React.FC = () => {
 
 	const handleSubmit = async (values: Exercise): Promise<void> => {
 		try {
-			isNew ? await createNewExercise(values) : await editExercise(values);
+			await createOrUpdateExercise(values);
 
 			navigation.navigate('exercises');
 		} catch (e) {
@@ -32,11 +32,7 @@ export const ExercisePage: React.FC = () => {
 
 	return (
 		<Page>
-			{exercise ? (
-				<ExerciseForm initialValues={exercise} isNew={isNew} onSubmit={handleSubmit} />
-			) : (
-				<Text>Loading...</Text>
-			)}
+			{exercise ? <ExerciseForm initialValues={exercise} onSubmit={handleSubmit} /> : <Text>Loading...</Text>}
 		</Page>
 	);
 };

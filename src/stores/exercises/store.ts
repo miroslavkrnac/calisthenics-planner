@@ -1,4 +1,5 @@
 import { logError, storeData } from '@utils';
+import { pushOrEdit } from '@utils/array';
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 import { EXERCISES_STORAGE_KEY } from './store.const';
@@ -26,33 +27,14 @@ export const useExercisesStore = create<ExercisesStore>()(
 			set({ exercises: filteredExercises, loading: false });
 		},
 
-		createNewExercise: async (exercise: Exercise) => {
+		createOrUpdateExercise: async (exercise: Exercise) => {
+			set({ loading: true });
+
 			const { exercises } = get();
-			const exerciseExists = exercises.some((e) => e.name === exercise.name);
 
-			if (exerciseExists) {
-				return;
-			}
-
-			const newExercises = [...exercises, exercise];
+			const newExercises = pushOrEdit(exercises, exercise, (e) => e.id === exercise.id);
 
 			try {
-				set({ loading: true });
-				await storeData(EXERCISES_STORAGE_KEY, newExercises);
-			} catch (error) {
-				logError(error as Error);
-				set({ loading: false });
-			}
-
-			set({ exercises: newExercises, loading: false });
-		},
-
-		editExercise: async (exercise: Exercise) => {
-			const { exercises } = get();
-			const newExercises = exercises.map((e) => (e.id === exercise.id ? exercise : e));
-
-			try {
-				set({ loading: true });
 				await storeData(EXERCISES_STORAGE_KEY, newExercises);
 			} catch (error) {
 				logError(error as Error);
