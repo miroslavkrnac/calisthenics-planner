@@ -1,5 +1,6 @@
 import type { WorkoutType } from '@components/Workout/Workout.types';
-import { isoString, logError, storeData } from '@utils';
+import { logError, storeData } from '@utils';
+import { pushOrEdit } from '@utils/array';
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 import { WORKOUTS_STORAGE_KEY } from './store.const';
@@ -11,21 +12,12 @@ export const useWorkoutsStore = create<WorkoutsStore>()(
 		workouts: [],
 		loading: false,
 
-		createNewWorkout: async (workout: WorkoutType) => {
+		createOrEditWorkout: async (workout: WorkoutType) => {
 			set({ loading: true });
 
 			const { workouts } = get();
-			const workoutExists = workouts.some((w) => w.id === workout.id);
 
-			if (workoutExists) {
-				return;
-			}
-
-			const workoutWithEndDate = {
-				...workout,
-				endDate: isoString(),
-			};
-			const newWorkouts = [...workouts, workoutWithEndDate];
+			const newWorkouts = pushOrEdit(workouts, workout, (w) => w.id === workout.id);
 
 			try {
 				await storeData(WORKOUTS_STORAGE_KEY, newWorkouts);
@@ -35,22 +27,6 @@ export const useWorkoutsStore = create<WorkoutsStore>()(
 			}
 
 			set({ workouts: newWorkouts, loading: false });
-		},
-
-		editWorkout: async (workout: WorkoutType) => {
-			set({ loading: true });
-
-			const { workouts } = get();
-			const newWorkouts = workouts.map((w) => (w.id === workout.id ? workout : w));
-
-			try {
-				await storeData(WORKOUTS_STORAGE_KEY, newWorkouts);
-
-				set({ workouts: newWorkouts, loading: false });
-			} catch (error) {
-				logError(error as Error);
-				set({ loading: false });
-			}
 		},
 
 		deleteWorkout: async (id: string) => {

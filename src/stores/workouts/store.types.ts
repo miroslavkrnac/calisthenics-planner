@@ -4,8 +4,7 @@ export interface WorkoutsStore {
 	workouts: WorkoutType[];
 	loading: boolean;
 
-	createNewWorkout: (workout: WorkoutType) => Promise<void>;
+	createOrEditWorkout: (workout: WorkoutType) => Promise<void>;
 	fetchWorkouts: () => Promise<void>;
-	editWorkout: (workout: WorkoutType) => Promise<void>;
 	deleteWorkout: (id: string) => Promise<void>;
 }

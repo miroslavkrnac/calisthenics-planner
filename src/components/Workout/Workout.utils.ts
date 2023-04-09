@@ -1,12 +1,13 @@
+import { getWorkout } from '@stores/workouts/store.utils';
 import { isoString, randomString } from '@utils';
-import type { CreateDefaultWorkoutPayload, WorkoutType } from './Workout.types';
+import type { WorkoutType } from './Workout.types';
 import type { WorkoutRep } from './WorkoutExercise/WorkoutExercise.types';
 
-export const createDefaultWorkout = ({ startDate }: CreateDefaultWorkoutPayload): WorkoutType => ({
-	id: randomString(),
+export const createDefaultWorkout = ({ startDate, endDate, exercises, id }: Partial<WorkoutType>): WorkoutType => ({
 	startDate: isoString(startDate),
-	endDate: undefined,
-	exercises: [],
+	id: !id || id === 'new' ? randomString() : id,
+	endDate: endDate ? isoString(endDate) : undefined,
+	exercises: exercises ?? [],
 });
 
 export const createDefaultRep = (): WorkoutRep => ({
@@ -14,3 +15,11 @@ export const createDefaultRep = (): WorkoutRep => ({
 	weight: 0,
 	count: 0,
 });
+
+export const getExistingOrDefaultWorkout = async (
+	defaults: Partial<WorkoutType> & { id: string },
+): Promise<WorkoutType> => {
+	const workout = await getWorkout(defaults.id);
+
+	return workout ?? createDefaultWorkout(defaults);
+};

@@ -12,6 +12,7 @@ import { WorkoutExercise } from './WorkoutExercise';
 import { useWorkout } from './context/useWorkout';
 import { AddWorkoutExercise } from './WorkoutActions';
 import type { WorkoutProps } from './Workout.types';
+import { useWorkoutAutosave } from './hooks/useWorkoutAutosave';
 
 export const Workout: React.FC<WorkoutProps> = ({ onSave }) => {
 	const { fetchExercises, exercises: allExercises } = useExercisesStore();
@@ -19,6 +20,8 @@ export const Workout: React.FC<WorkoutProps> = ({ onSave }) => {
 
 	const { addExercise, workout } = useWorkout();
 	const { exercises, startDate } = workout;
+
+	useWorkoutAutosave(workout);
 
 	useEffect(() => {
 		fetchExercises().catch(logError);

@@ -10,7 +10,3 @@ export interface WorkoutType {
 export interface WorkoutProps {
 	onSave: (workout: WorkoutType) => void;
 }
-
-export interface CreateDefaultWorkoutPayload {
-	startDate?: string;
-}
