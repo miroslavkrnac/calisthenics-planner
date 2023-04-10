@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { SelectList } from '@components/SelectList';
-import { View, StyleSheet, FlatList } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { mapExerciseToOption } from '@components/Exercise';
 import { palette } from '@colors/palette';
 import { Text } from '@components/Text';
