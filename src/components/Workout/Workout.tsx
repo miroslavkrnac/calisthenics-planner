@@ -4,7 +4,7 @@ import { View, StyleSheet } from 'react-native';
 import { mapExerciseToOption } from '@components/Exercise';
 import { palette } from '@colors/palette';
 import { Text } from '@components/Text';
-import { getFullDate, logError } from '@utils';
+import { getFullDate, getTime, logError } from '@utils';
 import { useExercisesStore } from '@stores/exercises/store';
 import { PageHeaderRightButton } from '@components/Navigation';
 import { useNavigation } from '@react-navigation/native';
@@ -20,7 +20,7 @@ export const Workout: React.FC<WorkoutProps> = ({ onSave }) => {
 	const navigation = useNavigation();
 
 	const { addExercise, workout } = useWorkout();
-	const { exercises, startDate } = workout;
+	const { exercises, startDate, endDate } = workout;
 
 	useWorkoutAutosave(workout);
 
@@ -41,7 +41,9 @@ export const Workout: React.FC<WorkoutProps> = ({ onSave }) => {
 	return (
 		<>
 			<View style={styles.titleContainer}>
-				<Text style={styles.titleText}>{getFullDate(startDate)}</Text>
+				<Text style={styles.titleText}>
+					{getFullDate(startDate)} - {endDate ? getTime(endDate) : 'now'}
+				</Text>
 				<SelectList
 					title="Select exercise"
 					trigger={AddWorkoutExercise}
