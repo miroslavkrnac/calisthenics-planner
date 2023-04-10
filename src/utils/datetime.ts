@@ -24,3 +24,13 @@ export const getCalendarDate = (date: Date | string = new Date()): string =>
 
 export const addTimeToDate = (date: Date | string = new Date()): string =>
 	dayjs(date).hour(dayjs().hour()).minute(dayjs().minute()).toISOString();
+
+export const getCurrentWeekDates = (): string[] => {
+	const startOfWeek = dayjs().startOf('week').add(1, 'day').format(DATE_TIME_FORMATS.DATE_CALENDAR);
+
+	return Array.from({ length: 7 }, (_, i) =>
+		dayjs(startOfWeek).add(i, 'day').format(DATE_TIME_FORMATS.DATE_CALENDAR),
+	);
+};
+
+export const weekDaysShort = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];

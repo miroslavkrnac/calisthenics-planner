@@ -6,6 +6,7 @@ import { FlatList, StyleSheet } from 'react-native';
 import { Text } from '@components/Text';
 import { palette } from '@colors/palette';
 import { PageHeaderRightButton } from '@components/Navigation';
+import { headers } from '@styles/headers';
 import { WorkoutsSummaryListItem } from '../WorkoutSummaryListItem/WorkoutSummaryListItem';
 import type { WorkoutSummaryListProps } from './WorkoutSummaryList.types';
 
@@ -64,11 +65,7 @@ export const WorkoutsSummaryList: React.FC<WorkoutSummaryListProps> = ({ selecte
 };
 
 const styles = StyleSheet.create({
-	header: {
-		fontSize: 18,
-		fontWeight: 'bold',
-		marginBottom: 10,
-	},
+	header: headers.h3,
 	noWorkouts: {
 		color: palette.textSecondary,
 	},
