@@ -1,15 +1,27 @@
-import React, { useEffect } from 'react';
-import { FlatList } from 'react-native';
+import React, { useEffect, useState } from 'react';
 import { confirm } from '@utils/alert';
 import { logError } from '@utils/log';
 import { useNavigation } from '@react-navigation/native';
 import { useExercisesStore } from '@stores/exercises/store';
+import { TextInput } from '@components/TextInput';
+import { KeyboardAwareFlatList } from 'react-native-keyboard-aware-scroll-view';
+import { stringsInclude } from '@utils';
 import { Exercise } from '../Exercise/Exercise';
 import { Text } from '../Text';
 
 export const ExercisesList: React.FC = () => {
 	const { navigate } = useNavigation();
 	const { exercises, loading, fetchExercises, removeExercise } = useExercisesStore();
+
+	const [term, setTerm] = useState('');
+
+	const filteredExercises = exercises.filter(({ name }) => {
+		if (!term) {
+			return true;
+		}
+
+		return stringsInclude(name, term);
+	});
 
 	useEffect(() => {
 		fetchExercises().catch(logError);
@@ -32,22 +44,30 @@ export const ExercisesList: React.FC = () => {
 			{loading ? (
 				<Text>Loading...</Text>
 			) : (
-				<FlatList
-					data={exercises}
-					style={{ flex: 1 }}
-					renderItem={({ item: { name, id }, index }) => (
-						<Exercise
-							name={name}
-							id={id}
-							isFirst={index === 0}
-							isLast={index === exercises.length - 1}
-							onDelete={() => handleDelete(id)}
-							onEdit={() => handleEdit(id)}
-						/>
-					)}
-					keyExtractor={({ id }) => id}
-					showsVerticalScrollIndicator={false}
-				/>
+				<>
+					<TextInput
+						placeholder="Type exercise to search"
+						value={term}
+						onChangeText={setTerm}
+						style={{ marginBottom: 20 }}
+					/>
+					<KeyboardAwareFlatList
+						data={filteredExercises}
+						style={{ flex: 1 }}
+						renderItem={({ item: { name, id }, index }) => (
+							<Exercise
+								name={name}
+								id={id}
+								isFirst={index === 0}
+								isLast={index === filteredExercises.length - 1}
+								onDelete={() => handleDelete(id)}
+								onEdit={() => handleEdit(id)}
+							/>
+						)}
+						keyExtractor={({ id }) => id}
+						showsVerticalScrollIndicator={false}
+					/>
+				</>
 			)}
 		</>
 	);
