@@ -8,6 +8,7 @@ import { getFullDate, logError } from '@utils';
 import { useExercisesStore } from '@stores/exercises/store';
 import { PageHeaderRightButton } from '@components/Navigation';
 import { useNavigation } from '@react-navigation/native';
+import { KeyboardAwareFlatList } from 'react-native-keyboard-aware-scroll-view';
 import { WorkoutExercise } from './WorkoutExercise';
 import { useWorkout } from './context/useWorkout';
 import { AddWorkoutExercise } from './WorkoutActions';
@@ -49,7 +50,7 @@ export const Workout: React.FC<WorkoutProps> = ({ onSave }) => {
 				/>
 			</View>
 
-			<FlatList
+			<KeyboardAwareFlatList
 				data={exercises}
 				renderItem={({ item: { name, id, reps } }) => (
 					<WorkoutExercise key={id} id={id} name={name} reps={reps} />
