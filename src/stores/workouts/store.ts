@@ -1,5 +1,5 @@
 import type { WorkoutType } from '@components/Workout/Workout.types';
-import { logError, storeData } from '@utils';
+import { isoString, logError, storeData } from '@utils';
 import { pushOrEdit } from '@utils/array';
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
@@ -17,7 +17,7 @@ export const useWorkoutsStore = create<WorkoutsStore>()(
 
 			const { workouts } = get();
 
-			const newWorkouts = pushOrEdit(workouts, workout, (w) => w.id === workout.id);
+			const newWorkouts = pushOrEdit(workouts, { ...workout, endDate: isoString() }, (w) => w.id === workout.id);
 
 			try {
 				await storeData(WORKOUTS_STORAGE_KEY, newWorkouts);

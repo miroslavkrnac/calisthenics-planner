@@ -41,7 +41,7 @@ export const WorkoutRep: React.FC<WorkoutRepProps> = ({ count, id, weight, exerc
 
 const styles = StyleSheet.create({
 	container: {
-		marginTop: 10,
+		marginTop: 3,
 		flexDirection: 'row',
 		alignItems: 'center',
 	},
