@@ -46,7 +46,7 @@ export const ExercisesList: React.FC = () => {
 			) : (
 				<>
 					<TextInput
-						placeholder="Type exercise to search"
+						placeholder="Type exercise name to search"
 						value={term}
 						onChangeText={setTerm}
 						style={{ marginBottom: 20 }}

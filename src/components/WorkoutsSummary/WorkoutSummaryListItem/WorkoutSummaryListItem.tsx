@@ -1,7 +1,7 @@
 import { palette } from '@colors/palette';
 import { getTime } from '@utils';
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Text } from '@components/Text';
 import {
 	ContextMenu,
@@ -10,34 +10,37 @@ import {
 	ContextMenuOption,
 	ContextMenuHeader,
 } from '@components/ContextMenu';
+import type { MenuContextProps } from 'react-native-popup-menu';
+import { withMenuContext } from 'react-native-popup-menu';
 import type { WorkoutSummaryListItemProps } from './WorkoutSummaryListItem.types';
 
-export const WorkoutsSummaryListItem: React.FC<WorkoutSummaryListItemProps> = ({
-	isFirst,
-	isLast,
-	workout,
-	onDelete,
-	onEdit,
-}) => {
-	const { startDate, endDate } = workout;
+export const WorkoutsSummaryListItem = withMenuContext<WorkoutSummaryListItemProps & MenuContextProps>(
+	({ isFirst, isLast, workout, onDelete, onEdit, ctx }) => {
+		const { startDate, endDate } = workout;
 
-	return (
-		<ContextMenu>
-			<ContextMenuTrigger triggerOnLongPress>
-				<View style={[styles.item, isFirst && styles.first, isLast && styles.last]}>
-					<Text>
-						{getTime(startDate)} - {getTime(endDate)}
-					</Text>
-				</View>
-			</ContextMenuTrigger>
-			<ContextMenuOptions>
-				<ContextMenuHeader title="Actions" />
-				<ContextMenuOption onSelect={onEdit} text="Edit" />
-				<ContextMenuOption onSelect={onDelete} text="Delete" />
-			</ContextMenuOptions>
-		</ContextMenu>
-	);
-};
+		return (
+			<ContextMenu name="summary-list-item">
+				<ContextMenuTrigger disabled>
+					<View style={[styles.item, isFirst && styles.first, isLast && styles.last]}>
+						<TouchableOpacity
+							style={{ flex: 1 }}
+							onPress={onEdit}
+							onLongPress={() => ctx.menuActions.openMenu('summary-list-item')}
+						>
+							<Text style={{ flex: 1 }}>
+								{getTime(startDate)} - {getTime(endDate)}
+							</Text>
+						</TouchableOpacity>
+					</View>
+				</ContextMenuTrigger>
+				<ContextMenuOptions>
+					<ContextMenuHeader title="Actions" />
+					<ContextMenuOption onSelect={onDelete} text="Delete" />
+				</ContextMenuOptions>
+			</ContextMenu>
+		);
+	},
+);
 
 const styles = StyleSheet.create({
 	item: {

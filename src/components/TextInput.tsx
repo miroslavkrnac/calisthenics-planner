@@ -24,14 +24,12 @@ export const TextInput: React.FC<TextInputProps> = ({ style, label, containerSty
 const styles = StyleSheet.create({
 	label: {
 		paddingBottom: 3,
-		paddingLeft: 3,
 	},
 	input: {
 		height: 40,
-		borderWidth: 1,
-		borderRadius: 7,
-		paddingLeft: 5,
-		backgroundColor: palette.secondary,
-		color: palette.backgroundPrimary,
+		borderBottomWidth: 2,
+		backgroundColor: palette.backgroundPrimary,
+		borderColor: palette.backgroundSecondary,
+		color: palette.textSecondary,
 	},
 });
