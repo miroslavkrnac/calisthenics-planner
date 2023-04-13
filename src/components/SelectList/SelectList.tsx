@@ -36,28 +36,31 @@ export const SelectList: React.FC<SelectListProps> = ({ trigger: TriggerCom, tit
 			<TriggerCom onPress={() => setModalVisible(true)} />
 
 			<Modal animationType="slide" transparent visible={modalVisible} onRequestClose={closeModal}>
-				<View style={styles.container}>
-					<View>
-						<Button style={styles.closeButton} title="Close" onPress={closeModal} />
-						<Text style={styles.title} type="secondary">
-							{title}
-						</Text>
+				<View style={styles.backdrop}>
+					<View style={styles.container}>
+						<View style={styles.header}>
+							<Button style={styles.closeButton} title="Close" onPress={closeModal} />
+							<Text style={styles.title} type="secondary">
+								{title}
+							</Text>
+						</View>
+						<FlatList
+							style={styles.selectList}
+							data={selectOptions}
+							renderItem={({ item: { label, value } }) => (
+								<Button
+									style={styles.selectItem}
+									textStyle={styles.selectItemText}
+									title={label}
+									type="secondary"
+									key={value}
+									onPress={() => handleSelect(value, label)}
+								/>
+							)}
+							keyExtractor={({ value }) => value}
+							showsVerticalScrollIndicator={false}
+						/>
 					</View>
-					<FlatList
-						data={selectOptions}
-						renderItem={({ item: { label, value } }) => (
-							<Button
-								style={styles.selectItem}
-								textStyle={styles.selectItemText}
-								title={label}
-								type="secondary"
-								key={value}
-								onPress={() => handleSelect(value, label)}
-							/>
-						)}
-						keyExtractor={({ value }) => value}
-						showsVerticalScrollIndicator={false}
-					/>
 				</View>
 			</Modal>
 		</>
@@ -65,10 +68,18 @@ export const SelectList: React.FC<SelectListProps> = ({ trigger: TriggerCom, tit
 };
 
 const styles = StyleSheet.create({
+	backdrop: {
+		backgroundColor: 'rgba(255, 255, 255, 0.6)',
+	},
 	container: {
-		flex: 1,
+		backgroundColor: palette.backgroundPrimary,
+		marginTop: '10%',
+		paddingBottom: 200,
+	},
+	header: {
+		paddingTop: 25,
+		paddingBottom: 20,
 		backgroundColor: palette.backgroundSecondary,
-		marginTop: '50%',
 	},
 	title: {
 		fontSize: 20,
@@ -76,7 +87,6 @@ const styles = StyleSheet.create({
 		color: palette.textPrimary,
 		textAlign: 'center',
 		paddingTop: 15,
-		paddingBottom: 45,
 	},
 	selectItem: {
 		padding: 10,
@@ -84,16 +94,20 @@ const styles = StyleSheet.create({
 		marginBottom: 5,
 		marginLeft: 20,
 		marginRight: 20,
-		backgroundColor: palette.secondary,
+		backgroundColor: palette.backgroundSecondary,
 		borderRadius: 5,
 	},
+	selectList: {
+		marginTop: 25,
+	},
 	selectItemText: {
-		color: palette.backgroundSecondary,
+		color: palette.textPrimary,
+		fontWeight: 'normal',
 	},
 	closeButton: {
 		backgroundColor: 'unset',
 		position: 'absolute',
-		top: 10,
+		bottom: 13,
 		left: 10,
 		padding: 10,
 		zIndex: 2,
