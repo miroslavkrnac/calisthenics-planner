@@ -1,12 +1,13 @@
 import { useNavigation } from '@react-navigation/native';
 import { useWorkoutsStore } from '@stores/workouts/store';
-import { DATE_TIME_FORMATS, format, getCalendarDate, logError } from '@utils';
+import { DATE_TIME_FORMATS, format, getCalendarDate } from '@utils';
 import React, { useEffect } from 'react';
 import { FlatList, StyleSheet } from 'react-native';
 import { Text } from '@components/Text';
 import { palette } from '@colors/palette';
 import { PageHeaderRightButton } from '@components/Navigation';
 import { headers } from '@styles/headers';
+import { confirm } from '@utils/alert';
 import { WorkoutsSummaryListItem } from '../WorkoutSummaryListItem/WorkoutSummaryListItem';
 import type { WorkoutSummaryListProps } from './WorkoutSummaryList.types';
 
@@ -24,7 +25,11 @@ export const WorkoutsSummaryList: React.FC<WorkoutSummaryListProps> = ({ selecte
 	};
 
 	const handleDelete = (id: string): void => {
-		deleteWorkout(id).catch(logError);
+		confirm({
+			title: 'Delete workout',
+			message: 'Are you sure you want to delete this workout?',
+			onConfirm: () => deleteWorkout(id),
+		});
 	};
 
 	useEffect(() => {
