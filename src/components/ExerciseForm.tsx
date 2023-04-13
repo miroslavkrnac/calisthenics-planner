@@ -4,6 +4,7 @@ import { TextInput } from '@components/TextInput';
 import { useNavigation } from '@react-navigation/native';
 import type { Exercise } from '@stores/exercises/store.types';
 import { PageHeaderRightButton } from './Navigation';
+import { SelectInput } from './SelectInput';
 
 interface ExerciseFormProps {
 	initialValues: Exercise;
@@ -39,6 +40,16 @@ export const ExerciseForm: React.FC<ExerciseFormProps> = ({ initialValues, onSub
 				value={form.name}
 				onChangeText={handleChange('name')}
 				placeholder="Insert exercise name"
+				style={{ marginBottom: 20 }}
+			/>
+			<SelectInput
+				label="Exercise type"
+				selectedValue={form.type}
+				onSelect={handleChange('type')}
+				options={[
+					{ label: 'Timed', value: 'timed' },
+					{ label: 'Weighted', value: 'weighted' },
+				]}
 			/>
 		</Form>
 	);

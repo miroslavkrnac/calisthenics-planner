@@ -17,7 +17,7 @@ export const ExercisePage: React.FC = () => {
 	useSetEntityStateTitle();
 
 	const isNew = params.id === 'new';
-	const defaultExercise = { id: randomString(), name: '' };
+	const defaultExercise = { id: randomString(), name: '', type: 'weighted' } as const;
 	const exercise = isNew ? defaultExercise : exercises.find(({ id }) => id === params.id);
 
 	const handleSubmit = async (values: Exercise): Promise<void> => {

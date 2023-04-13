@@ -7,7 +7,10 @@ export interface ExercisesStore {
 	fetchExercises: () => Promise<void>;
 }
 
+export type ExerciseType = 'timed' | 'weighted';
+
 export interface Exercise {
 	id: string;
 	name: string;
+	type: ExerciseType;
 }

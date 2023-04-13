@@ -30,6 +30,6 @@ const styles = StyleSheet.create({
 		borderBottomWidth: 2,
 		backgroundColor: palette.backgroundPrimary,
 		borderColor: palette.backgroundSecondary,
-		color: palette.textSecondary,
+		color: palette.textPrimary,
 	},
 });
