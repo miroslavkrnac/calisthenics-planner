@@ -2,7 +2,6 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { NavigationButton } from '@components/Navigation';
 import { palette } from '@colors/palette';
-
 import { useMenuStore } from '@stores/menu/store';
 
 export const BOTTOM_PANEL_HEIGHT = 100;
